@@ -4,7 +4,7 @@
     <version>1.0</version>
     <author>Franck Paul</author>
     <desc>Pre-installation Check</desc>
-    <file>https://github.com/franck-paul/pingMastodon/releases/download/2.0/plugin-pingMastodon-1.0.zip</file>
+    <file>https://github.com/franck-paul/pingMastodon/releases/download/1.0/plugin-pingMastodon-1.0.zip</file>
     <da:dcmin>2.24</da:dcmin>
     <da:details>https://open-time.net/?q=pingMastodon</da:details>
     <da:support>https://github.com/franck-paul/pingMastodon</da:support>
