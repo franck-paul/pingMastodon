@@ -17,7 +17,7 @@ if (!defined('DC_CONTEXT_ADMIN')) {
 // dead but useful code, in order to have translations
 __('pingMastodon') . __('Ping Mastodon');
 
-dcCore::app()->menu[dcAdmin::MENU_SYSTEM]->addItem(
+dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
     __('Ping Mastodon'),
     dcCore::app()->adminurl->get('admin.plugin.pingMastodon'),
     [urldecode(dcPage::getPF('pingMastodon/icon.svg')), urldecode(dcPage::getPF('pingMastodon/icon-dark.svg'))],
