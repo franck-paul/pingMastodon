@@ -59,9 +59,10 @@ dcCore::app()->addBehavior('coreFirstPublicationEntries', function (dcBlog $blog
     try {
         // Get posts information
         $rs = $blog->getPosts(['post_id' => $ids]);
+        $rs->extend('rsExtPost');
         while ($rs->fetch()) {
             $payload = [
-                'status'     => $prefix . $rs->post_title . ' ' . $rs->post_url,
+                'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),
                 'visibility' => 'public',       // public, unlisted, private, direct
             ];
             netHttp::quickPost($uri, $payload);
