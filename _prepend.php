@@ -25,11 +25,11 @@ dcCore::app()->addBehavior('coreFirstPublicationEntries', function (dcBlog $blog
     $token    = $blog->settings->pingMastodon->token;
     $prefix   = $blog->settings->pingMastodon->prefix;
 
-    if ($prefix !== '') {
+    if (!empty($prefix)) {
         $prefix .= ' ';
     }
 
-    if (empty($instance) || empty($token) || count($ids) === 0) {
+    if (empty($instance) || empty($token) || empty($ids)) {
         return;
     }
 
