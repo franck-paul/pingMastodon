@@ -16,7 +16,7 @@ $this->registerModule(
     'Franck Paul',
     '1.0.2',
     [
-        'requires'    => [['core', '2.24']],
+        'requires'    => [['core', '2.26']],
         'type'        => 'plugin',
         'permissions' => dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_USAGE,

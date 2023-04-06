@@ -10,6 +10,10 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Network\Http;
+
 if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
@@ -41,14 +45,14 @@ class adminPingMastodon
 
                 dcCore::app()->blog->settings->pingMastodon->put('active', !empty($_POST['pm_active']));
 
-                dcCore::app()->blog->settings->pingMastodon->put('instance', trim(html::escapeHTML($_POST['pm_instance'])));
-                dcCore::app()->blog->settings->pingMastodon->put('token', trim(html::escapeHTML($_POST['pm_token'])));
-                dcCore::app()->blog->settings->pingMastodon->put('prefix', trim(html::escapeHTML($_POST['pm_prefix'])));
+                dcCore::app()->blog->settings->pingMastodon->put('instance', trim(Html::escapeHTML($_POST['pm_instance'])));
+                dcCore::app()->blog->settings->pingMastodon->put('token', trim(Html::escapeHTML($_POST['pm_token'])));
+                dcCore::app()->blog->settings->pingMastodon->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
 
                 dcCore::app()->blog->triggerBlog();
 
                 dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
-                http::redirect(dcCore::app()->admin->getPageURL());
+                Http::redirect(dcCore::app()->admin->getPageURL());
             }
         } catch (Exception $e) {
             dcCore::app()->error->add($e->getMessage());
@@ -70,7 +74,7 @@ class adminPingMastodon
         '<body>' .
         dcPage::breadcrumb(
             [
-                html::escapeHTML(dcCore::app()->blog->name) => '',
+                Html::escapeHTML(dcCore::app()->blog->name) => '',
                 __('Ping Mastodon')                         => '',
             ]
         ) .
@@ -82,11 +86,11 @@ class adminPingMastodon
         '<label for="pm_active" class="classic">' . __('Activate pingMastodon plugin') . '</label></p>' .
 
         '<p><label for="pm_instance">' . __('Mastodon instance:') . '</label> ' .
-        form::field('pm_instance', 48, 128, html::escapeHTML(dcCore::app()->admin->instance)) . '</p>' .
+        form::field('pm_instance', 48, 128, Html::escapeHTML(dcCore::app()->admin->instance)) . '</p>' .
         '<p><label for="pm_token">' . __('Application token:') . '</label> ' .
-        form::field('pm_token', 64, 128, html::escapeHTML(dcCore::app()->admin->token)) . '</p>' .
+        form::field('pm_token', 64, 128, Html::escapeHTML(dcCore::app()->admin->token)) . '</p>' .
         '<p><label for="pm_prefix">' . __('Status prefix:') . '</label> ' .
-        form::field('pm_prefix', 30, 128, html::escapeHTML(dcCore::app()->admin->prefix)) . '</p>' .
+        form::field('pm_prefix', 30, 128, Html::escapeHTML(dcCore::app()->admin->prefix)) . '</p>' .
 
         '<p>' . dcCore::app()->formNonce() . '<input type="submit" value="' . __('Save') . '" /></p>' .
         '</form>';
