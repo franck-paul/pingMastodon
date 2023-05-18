@@ -11,6 +11,8 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+use Dotclear\Helper\Network\HttpClient;
+
 // pingMastodon behavior
 dcCore::app()->addBehavior('coreFirstPublicationEntries', function (dcBlog $blog, array $ids) {
     // Needed until 2.25
@@ -48,7 +50,7 @@ dcCore::app()->addBehavior('coreFirstPublicationEntries', function (dcBlog $blog
                 'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),
                 'visibility' => 'public',       // public, unlisted, private, direct
             ];
-            netHttp::quickPost($uri, $payload);
+            HttpClient::quickPost($uri, $payload);
         }
     } catch (Exception $e) {
     }

@@ -9,9 +9,11 @@
 # DOT NOT MODIFY THIS FILE !
 #
 
-l10n::$locales['Ping Mastodon'] = '';
-l10n::$locales['pingMastodon'] = '';
-l10n::$locales['Activate pingMastodon plugin'] = 'Activer le plugin pingMastodon';
-l10n::$locales['Mastodon instance:'] = 'Instance mastodon :';
-l10n::$locales['Application token:'] = 'Jeton applicatif :';
-l10n::$locales['Status prefix:'] = 'Préfixe de statut :';
+use Dotclear\Helper\L10n;
+
+L10n::$locales['Ping Mastodon'] = '';
+L10n::$locales['pingMastodon'] = '';
+L10n::$locales['Activate pingMastodon plugin'] = 'Activer le plugin pingMastodon';
+L10n::$locales['Mastodon instance:'] = 'Instance mastodon :';
+L10n::$locales['Application token:'] = 'Jeton applicatif :';
+L10n::$locales['Status prefix:'] = 'Préfixe de statut :';
