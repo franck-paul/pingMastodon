@@ -13,8 +13,8 @@ use Dotclear\Helper\L10n;
 
 L10n::$locales['Ping Mastodon'] = '';
 L10n::$locales['pingMastodon'] = '';
-L10n::$locales['Activate pingMastodon plugin'] = 'Activer le plugin pingMastodon';
-L10n::$locales['Mastodon instance:'] = 'Instance mastodon :';
-L10n::$locales['Application token:'] = 'Jeton applicatif :';
-L10n::$locales['Status prefix:'] = 'Préfixe de statut :';
+L10n::$locales['Activate pingMastodon plugin'] = '';
+L10n::$locales['Mastodon instance:'] = '';
+L10n::$locales['Application token:'] = '';
+L10n::$locales['Status prefix:'] = '';
 L10n::$locales['Save'] = '';

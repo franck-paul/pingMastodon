@@ -13,36 +13,26 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/pingMastodon/src/Backend.php:28
-#: ../git-plugins/pingMastodon/src/Backend.php:40
-#: ../git-plugins/pingMastodon/src/Manage.php:90
 msgid "Ping Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Backend.php:28
-#: ../git-plugins/pingMastodon/src/Manage.php:85
 msgid "pingMastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:104
 msgid "Activate pingMastodon plugin"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:113
 msgid "Mastodon instance:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:124
 msgid "Application token:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:134
 msgid "Status prefix:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:139
 msgid "Save"
 msgstr ""
