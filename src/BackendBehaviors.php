@@ -44,7 +44,7 @@ class BackendBehaviors
             dcAuth::PERMISSION_CONTENT_ADMIN,
         ]), dcCore::app()->blog->id)) {
             $ap->addAction(
-                [__('Typo') => [__('Typographic replacements') => 'pingMastodon']],
+                [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
                 [self::class, 'adminPingMastodon']
             );
         }
