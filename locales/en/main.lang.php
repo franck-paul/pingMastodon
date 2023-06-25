@@ -13,6 +13,10 @@ use Dotclear\Helper\L10n;
 
 L10n::$locales['Ping Mastodon'] = '';
 L10n::$locales['pingMastodon'] = '';
+L10n::$locales['Mastodon'] = '';
+L10n::$locales['Typo'] = '';
+L10n::$locales['Typographic replacements'] = '';
+L10n::$locales['All entries have been ping to Mastodon.'] = '';
 L10n::$locales['Activate pingMastodon plugin'] = '';
 L10n::$locales['Mastodon instance:'] = '';
 L10n::$locales['Application token:'] = '';

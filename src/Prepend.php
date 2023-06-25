@@ -14,11 +14,8 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use dcBlog;
 use dcCore;
 use dcNsProcess;
-use Dotclear\Helper\Network\HttpClient;
-use Exception;
 
 class Prepend extends dcNsProcess
 {
@@ -36,44 +33,7 @@ class Prepend extends dcNsProcess
         }
 
         // pingMastodon behavior
-        dcCore::app()->addBehavior('coreFirstPublicationEntries', function (dcBlog $blog, array $ids) {
-            $settings = dcCore::app()->blog->settings->get(My::id());
-            if (!$settings->active) {
-                return;
-            }
-
-            $instance = $settings->instance;
-            $token    = $settings->token;
-            $prefix   = $settings->prefix;
-
-            if (!empty($prefix)) {
-                $prefix .= ' ';
-            }
-
-            if (empty($instance) || empty($token) || empty($ids)) {
-                return;
-            }
-
-            // Prepare instance URI
-            if (!parse_url($instance, PHP_URL_HOST)) {
-                $instance = 'https://' . $instance;
-            }
-            $uri = rtrim($instance, '/') . '/api/v1/statuses?access_token=' . $token;
-
-            try {
-                // Get posts information
-                $rs = $blog->getPosts(['post_id' => $ids]);
-                $rs->extend('rsExtPost');
-                while ($rs->fetch()) {
-                    $payload = [
-                        'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),
-                        'visibility' => 'public',       // public, unlisted, private, direct
-                    ];
-                    HttpClient::quickPost($uri, $payload);
-                }
-            } catch (Exception $e) {
-            }
-        });
+        dcCore::app()->addBehavior('coreFirstPublicationEntries', [Helper::class, 'ping']);
 
         return true;
     }

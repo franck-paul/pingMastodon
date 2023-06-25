@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use dcAdmin;
+use dcAuth;
 use dcCore;
 use dcNsProcess;
 
@@ -43,6 +44,16 @@ class Backend extends dcNsProcess
             preg_match(My::urlScheme(), $_SERVER['REQUEST_URI']),
             My::checkContext(My::MENU)
         );
+
+        if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_CONTENT_ADMIN,
+        ]), dcCore::app()->blog->id)) {
+            dcCore::app()->addBehaviors([
+                /* Add behavior callbacks for posts actions */
+                'adminPostsActions' => [BackendBehaviors::class, 'adminPostsActions'],
+                'adminPagesActions' => [BackendBehaviors::class, 'adminPagesActions'],
+            ]);
+        }
 
         return true;
     }
