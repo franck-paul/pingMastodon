@@ -1,10 +1,10 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="sysInfo">
     <name>pingMastodon</name>
-    <version>2.1</version>
+    <version>2.2</version>
     <author>Franck Paul</author>
     <desc>Pre-installation Check</desc>
-    <file>https://github.com/franck-paul/pingMastodon/releases/download/2.1/plugin-pingMastodon-2.1.zip</file>
+    <file>https://github.com/franck-paul/pingMastodon/releases/download/2.2/plugin-pingMastodon-2.2.zip</file>
     <da:dcmin>2.26</da:dcmin>
     <da:details>https://open-time.net/?q=pingMastodon</da:details>
     <da:support>https://github.com/franck-paul/pingMastodon</da:support>
