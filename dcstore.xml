@@ -1,5 +1,5 @@
 <modules xmlns:da="http://dotaddict.org/da/">
-  <module id="sysInfo">
+  <module id="pingMastodon">
     <name>pingMastodon</name>
     <version>2.3.1</version>
     <author>Franck Paul</author>
