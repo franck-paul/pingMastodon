@@ -15,26 +15,23 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use dcCore;
-use dcNsProcess;
+use Dotclear\Core\Process;
 
-class Prepend extends dcNsProcess
+class Prepend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::PREPEND);
-
-        return static::$init;
+        return self::status(My::checkContext(My::PREPEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
         // pingMastodon behavior
-        dcCore::app()->addBehavior('coreFirstPublicationEntries', [Helper::class, 'ping']);
+        dcCore::app()->addBehavior('coreFirstPublicationEntries', Helper::ping(...));
 
         return true;
     }

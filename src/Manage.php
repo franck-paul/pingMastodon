@@ -15,8 +15,9 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use dcCore;
-use dcNsProcess;
-use dcPage;
+use Dotclear\Core\Backend\Notices;
+use Dotclear\Core\Backend\Page;
+use Dotclear\Core\Process;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
@@ -27,17 +28,14 @@ use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
 use Exception;
 
-class Manage extends dcNsProcess
+class Manage extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     /**
      * Initializes the page.
      */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::MANAGE);
-
-        return static::$init;
+        return self::status(My::checkContext(My::MANAGE));
     }
 
     /**
@@ -45,7 +43,7 @@ class Manage extends dcNsProcess
      */
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
@@ -61,8 +59,8 @@ class Manage extends dcNsProcess
 
                 dcCore::app()->blog->triggerBlog();
 
-                dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                Notices::addSuccessNotice(__('Settings have been successfully updated.'));
+                dcCore::app()->admin->url->redirect('admin.plugin.' . My::id());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -76,21 +74,21 @@ class Manage extends dcNsProcess
      */
     public static function render(): void
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return;
         }
 
         $settings = dcCore::app()->blog->settings->get(My::id());
 
-        dcPage::openModule(__('pingMastodon'));
+        Page::openModule(__('pingMastodon'));
 
-        echo dcPage::breadcrumb(
+        echo Page::breadcrumb(
             [
                 Html::escapeHTML(dcCore::app()->blog->name) => '',
                 __('Ping Mastodon')                         => '',
             ]
         );
-        echo dcPage::notices();
+        echo Notices::getNotices();
 
         // Form
         echo
@@ -142,6 +140,6 @@ class Manage extends dcNsProcess
             ])
         ->render();
 
-        dcPage::closeModule();
+        Page::closeModule();
     }
 }

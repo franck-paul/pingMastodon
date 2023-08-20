@@ -14,33 +14,30 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use dcAdmin;
 use dcAuth;
 use dcCore;
-use dcNsProcess;
+use Dotclear\Core\Backend\Menus;
+use Dotclear\Core\Process;
 
-class Backend extends dcNsProcess
+class Backend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::BACKEND);
-
         // dead but useful code, in order to have translations
         __('pingMastodon') . __('Ping Mastodon');
 
-        return static::$init;
+        return self::status(My::checkContext(My::BACKEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
-        dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
+        dcCore::app()->admin->menus[Menus::MENU_BLOG]->addItem(
             __('Ping Mastodon'),
-            My::makeUrl(),
+            My::manageUrl(),
             My::icons(),
             preg_match(My::urlScheme(), $_SERVER['REQUEST_URI']),
             My::checkContext(My::MENU)
@@ -51,8 +48,8 @@ class Backend extends dcNsProcess
         ]), dcCore::app()->blog->id)) {
             dcCore::app()->addBehaviors([
                 /* Add behavior callbacks for posts actions */
-                'adminPostsActions' => [BackendBehaviors::class, 'adminPostsActions'],
-                'adminPagesActions' => [BackendBehaviors::class, 'adminPagesActions'],
+                'adminPostsActions' => BackendBehaviors::adminPostsActions(...),
+                'adminPagesActions' => BackendBehaviors::adminPagesActions(...),
             ]);
         }
 
