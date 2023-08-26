@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use dcBlog;
-use dcCore;
 use Dotclear\Helper\Network\HttpClient;
 use Exception;
 
@@ -23,7 +22,7 @@ class Helper
 {
     public static function ping(dcBlog $blog, array $ids)
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         if (!$settings->active) {
             return;
         }

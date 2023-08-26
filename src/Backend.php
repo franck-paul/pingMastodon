@@ -35,13 +35,7 @@ class Backend extends Process
             return false;
         }
 
-        dcCore::app()->admin->menus[Menus::MENU_BLOG]->addItem(
-            __('Ping Mastodon'),
-            My::manageUrl(),
-            My::icons(),
-            preg_match(My::urlScheme(), $_SERVER['REQUEST_URI']),
-            My::checkContext(My::MENU)
-        );
+        My::addBackendMenuItem(Menus::MENU_BLOG);
 
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_CONTENT_ADMIN,

@@ -49,7 +49,7 @@ class Manage extends Process
 
         if (!empty($_POST)) {
             try {
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
 
                 $settings->put('active', !empty($_POST['pm_active']));
 
@@ -78,9 +78,9 @@ class Manage extends Process
             return;
         }
 
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
 
-        Page::openModule(__('pingMastodon'));
+        Page::openModule(My::name());
 
         echo Page::breadcrumb(
             [
@@ -135,7 +135,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['frmsubmit']))
                         ->value(__('Save')),
-                    dcCore::app()->formNonce(false),
+                    ... My::hiddenFields(),
                 ]),
             ])
         ->render();
