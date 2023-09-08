@@ -17,9 +17,16 @@ namespace Dotclear\Plugin\pingMastodon;
 use dcBlog;
 use Dotclear\Helper\Network\HttpClient;
 use Exception;
+use rsExtPost;
 
 class Helper
 {
+    /**
+     * Ping mastodon server
+     *
+     * @param      dcBlog  $blog   The blog
+     * @param      array   $ids    The identifiers
+     */
     public static function ping(dcBlog $blog, array $ids)
     {
         $settings = My::settings();
@@ -48,7 +55,7 @@ class Helper
         try {
             // Get posts information
             $rs = $blog->getPosts(['post_id' => $ids]);
-            $rs->extend('rsExtPost');
+            $rs->extend(rsExtPost::class);
             while ($rs->fetch()) {
                 $payload = [
                     'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),
@@ -56,7 +63,7 @@ class Helper
                 ];
                 HttpClient::quickPost($uri, $payload);
             }
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
     }
 }
