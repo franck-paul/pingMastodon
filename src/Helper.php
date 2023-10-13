@@ -24,14 +24,14 @@ class Helper
     /**
      * Ping mastodon server
      *
-     * @param      dcBlog  $blog   The blog
-     * @param      array   $ids    The identifiers
+     * @param      dcBlog       $blog   The blog
+     * @param      array<int>   $ids    The identifiers
      */
-    public static function ping(dcBlog $blog, array $ids)
+    public static function ping(dcBlog $blog, array $ids): string
     {
         $settings = My::settings();
         if (!$settings->active) {
-            return;
+            return '';
         }
 
         $instance = $settings->instance;
@@ -43,7 +43,7 @@ class Helper
         }
 
         if (empty($instance) || empty($token) || empty($ids)) {
-            return;
+            return '';
         }
 
         // Prepare instance URI
@@ -65,5 +65,7 @@ class Helper
             }
         } catch (Exception) {
         }
+
+        return '';
     }
 }

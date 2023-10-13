@@ -24,7 +24,7 @@ use Dotclear\Plugin\pages\BackendActions as PagesBackendActions;
 
 class BackendBehaviors
 {
-    public static function adminPostsActions(ActionsPosts $ap)
+    public static function adminPostsActions(ActionsPosts $ap): string
     {
         // Add menuitem in actions dropdown list
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
@@ -35,9 +35,11 @@ class BackendBehaviors
                 self::adminPingMastodon(...)
             );
         }
+
+        return '';
     }
 
-    public static function adminPagesActions(PagesBackendActions $ap)
+    public static function adminPagesActions(PagesBackendActions $ap): string
     {
         // Add menuitem in actions dropdown list
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
@@ -48,9 +50,15 @@ class BackendBehaviors
                 self::adminPingMastodon(...)
             );
         }
+
+        return '';
     }
 
-    public static function adminPingMastodon($ap, arrayObject $post)
+    /**
+     * @param      ActionsPosts|PagesBackendActions     $ap     Actions
+     * @param      ArrayObject<string, mixed>           $post   The post
+     */
+    public static function adminPingMastodon(ActionsPosts|PagesBackendActions $ap, arrayObject $post): void
     {
         $rs = $ap->getRS();
         if ($rs->rows()) {
