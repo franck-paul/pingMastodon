@@ -18,6 +18,7 @@ use arrayObject;
 use dcAuth;
 use dcBlog;
 use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Plugin\pages\BackendActions as PagesBackendActions;
@@ -29,7 +30,7 @@ class BackendBehaviors
         // Add menuitem in actions dropdown list
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_CONTENT_ADMIN,
-        ]), dcCore::app()->blog->id)) {
+        ]), App::blog()->id())) {
             $ap->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
                 self::adminPingMastodon(...)
@@ -44,7 +45,7 @@ class BackendBehaviors
         // Add menuitem in actions dropdown list
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_CONTENT_ADMIN,
-        ]), dcCore::app()->blog->id)) {
+        ]), App::blog()->id())) {
             $ap->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
                 self::adminPingMastodon(...)
@@ -70,7 +71,7 @@ class BackendBehaviors
                 }
             }
             if (count($ids)) {
-                Helper::ping(dcCore::app()->blog, $ids);
+                Helper::ping(App::blog(), $ids);
                 Notices::addSuccessNotice(__('All entries have been ping to Mastodon.'));
             }
             $ap->redirect(true);

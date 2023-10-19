@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use dcBlog;
 use Dotclear\Helper\Network\HttpClient;
+use Dotclear\Interface\Core\BlogInterface;
 use Exception;
 use rsExtPost;
 
@@ -24,10 +24,10 @@ class Helper
     /**
      * Ping mastodon server
      *
-     * @param      dcBlog       $blog   The blog
-     * @param      array<int>   $ids    The identifiers
+     * @param      BlogInterface        $blog   The blog
+     * @param      array<int>           $ids    The identifiers
      */
-    public static function ping(dcBlog $blog, array $ids): string
+    public static function ping(BlogInterface $blog, array $ids): string
     {
         $settings = My::settings();
         if (!$settings->active) {

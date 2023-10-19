@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\pingMastodon;
 
 use dcAuth;
 use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Menus;
 use Dotclear\Core\Process;
 
@@ -39,7 +40,7 @@ class Backend extends Process
 
         if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
             dcAuth::PERMISSION_CONTENT_ADMIN,
-        ]), dcCore::app()->blog->id)) {
+        ]), App::blog()->id())) {
             dcCore::app()->addBehaviors([
                 /* Add behavior callbacks for posts actions */
                 'adminPostsActions' => BackendBehaviors::adminPostsActions(...),
