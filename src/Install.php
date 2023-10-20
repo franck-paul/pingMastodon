@@ -14,8 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use dcCore;
-use dcNamespace;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Exception;
 
@@ -36,13 +35,13 @@ class Install extends Process
             // Init
             $settings = My::settings();
 
-            $settings->put('active', false, dcNamespace::NS_BOOL, 'Active', false, true);
+            $settings->put('active', false, App::blogWorkspace()::NS_BOOL, 'Active', false, true);
 
-            $settings->put('instance', '', dcNamespace::NS_STRING, 'Instance URL', false, true);
-            $settings->put('token', '', dcNamespace::NS_STRING, 'App token', false, true);
-            $settings->put('prefix', '', dcNamespace::NS_STRING, 'Status prefix', false, true);
+            $settings->put('instance', '', App::blogWorkspace()::NS_STRING, 'Instance URL', false, true);
+            $settings->put('token', '', App::blogWorkspace()::NS_STRING, 'App token', false, true);
+            $settings->put('prefix', '', App::blogWorkspace()::NS_STRING, 'Status prefix', false, true);
         } catch (Exception $e) {
-            dcCore::app()->error->add($e->getMessage());
+            App::error()->add($e->getMessage());
         }
 
         return true;

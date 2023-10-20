@@ -16,8 +16,8 @@ namespace Dotclear\Plugin\pingMastodon;
 
 use Dotclear\Helper\Network\HttpClient;
 use Dotclear\Interface\Core\BlogInterface;
+use Dotclear\Schema\Extension\Post;
 use Exception;
-use rsExtPost;
 
 class Helper
 {
@@ -55,7 +55,7 @@ class Helper
         try {
             // Get posts information
             $rs = $blog->getPosts(['post_id' => $ids]);
-            $rs->extend(rsExtPost::class);
+            $rs->extend(Post::class);
             while ($rs->fetch()) {
                 $payload = [
                     'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),

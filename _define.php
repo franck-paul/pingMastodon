@@ -18,12 +18,9 @@ $this->registerModule(
     [
         'requires'    => [['core', '2.28']],
         'type'        => 'plugin',
-        'permissions' => dcCore::app()->auth->makePermissions([
-            dcAuth::PERMISSION_USAGE,
-            dcAuth::PERMISSION_ADMIN,
-        ]),
-        'details'    => 'https://open-time.net/docs/plugins/pingMastodon',
-        'support'    => 'https://github.com/franck-paul/pingMastodon',
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/pingMastodon/main/dcstore.xml',
+        'permissions' => 'My',
+        'details'     => 'https://open-time.net/docs/plugins/pingMastodon',
+        'support'     => 'https://github.com/franck-paul/pingMastodon',
+        'repository'  => 'https://raw.githubusercontent.com/franck-paul/pingMastodon/main/dcstore.xml',
     ]
 );

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 
 class Prepend extends Process
@@ -31,7 +31,7 @@ class Prepend extends Process
         }
 
         // pingMastodon behavior
-        dcCore::app()->addBehavior('coreFirstPublicationEntries', Helper::ping(...));
+        App::behavior()->addBehavior('coreFirstPublicationEntries', Helper::ping(...));
 
         return true;
     }

@@ -15,12 +15,10 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use arrayObject;
-use dcAuth;
-use dcBlog;
-use dcCore;
 use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
 use Dotclear\Core\Backend\Notices;
+use Dotclear\Interface\Core\BlogInterface;
 use Dotclear\Plugin\pages\BackendActions as PagesBackendActions;
 
 class BackendBehaviors
@@ -28,8 +26,8 @@ class BackendBehaviors
     public static function adminPostsActions(ActionsPosts $ap): string
     {
         // Add menuitem in actions dropdown list
-        if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-            dcAuth::PERMISSION_CONTENT_ADMIN,
+        if (App::auth()->check(App::auth()->makePermissions([
+            App::auth()::PERMISSION_CONTENT_ADMIN,
         ]), App::blog()->id())) {
             $ap->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
@@ -43,8 +41,8 @@ class BackendBehaviors
     public static function adminPagesActions(PagesBackendActions $ap): string
     {
         // Add menuitem in actions dropdown list
-        if (dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-            dcAuth::PERMISSION_CONTENT_ADMIN,
+        if (App::auth()->check(App::auth()->makePermissions([
+            App::auth()::PERMISSION_CONTENT_ADMIN,
         ]), App::blog()->id())) {
             $ap->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
@@ -65,7 +63,7 @@ class BackendBehaviors
         if ($rs->rows()) {
             $ids = [];
             while ($rs->fetch()) {
-                if ((int) $rs->post_status === dcBlog::POST_PUBLISHED) {
+                if ((int) $rs->post_status === BlogInterface::POST_PUBLISHED) {
                     // Ping only published entry
                     $ids[] = $rs->post_id;
                 }
