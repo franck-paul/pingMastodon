@@ -18,7 +18,6 @@ use arrayObject;
 use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
 use Dotclear\Core\Backend\Notices;
-use Dotclear\Interface\Core\BlogInterface;
 use Dotclear\Plugin\pages\BackendActions as PagesBackendActions;
 
 class BackendBehaviors
@@ -63,7 +62,7 @@ class BackendBehaviors
         if ($rs->rows()) {
             $ids = [];
             while ($rs->fetch()) {
-                if ((int) $rs->post_status === BlogInterface::POST_PUBLISHED) {
+                if ((int) $rs->post_status === App::blog()::POST_PUBLISHED) {
                     // Ping only published entry
                     $ids[] = $rs->post_id;
                 }
