@@ -40,8 +40,8 @@ class Install extends Process
             $settings->put('instance', '', App::blogWorkspace()::NS_STRING, 'Instance URL', false, true);
             $settings->put('token', '', App::blogWorkspace()::NS_STRING, 'App token', false, true);
             $settings->put('prefix', '', App::blogWorkspace()::NS_STRING, 'Status prefix', false, true);
-        } catch (Exception $e) {
-            App::error()->add($e->getMessage());
+        } catch (Exception $exception) {
+            App::error()->add($exception->getMessage());
         }
 
         return true;

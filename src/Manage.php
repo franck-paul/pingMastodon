@@ -47,7 +47,7 @@ class Manage extends Process
             return false;
         }
 
-        if (!empty($_POST)) {
+        if ($_POST !== []) {
             try {
                 $settings = My::settings();
 

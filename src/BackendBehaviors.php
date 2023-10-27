@@ -67,10 +67,12 @@ class BackendBehaviors
                     $ids[] = $rs->post_id;
                 }
             }
-            if (count($ids)) {
+
+            if ($ids !== []) {
                 Helper::ping(App::blog(), $ids);
                 Notices::addSuccessNotice(__('All entries have been ping to Mastodon.'));
             }
+
             $ap->redirect(true);
         } else {
             $ap->redirect();

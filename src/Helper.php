@@ -42,7 +42,7 @@ class Helper
             $prefix .= ' ';
         }
 
-        if (empty($instance) || empty($token) || empty($ids)) {
+        if (empty($instance) || empty($token) || $ids === []) {
             return '';
         }
 
@@ -50,6 +50,7 @@ class Helper
         if (!parse_url($instance, PHP_URL_HOST)) {
             $instance = 'https://' . $instance;
         }
+
         $uri = rtrim($instance, '/') . '/api/v1/statuses?access_token=' . $token;
 
         try {
