@@ -11,10 +11,10 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 $this->registerModule(
-    'pingMastodon',
+    'Ping Mastodon',
     'Ping Mastodon',
     'Franck Paul',
-    '4.1',
+    '4.2',
     [
         'requires'    => [['core', '2.28']],
         'type'        => 'plugin',
