@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
+use Dotclear\App;
 use Dotclear\Helper\Network\HttpClient;
 use Dotclear\Interface\Core\BlogInterface;
 use Dotclear\Schema\Extension\Post;
@@ -37,10 +38,7 @@ class Helper
         $instance = $settings->instance;
         $token    = $settings->token;
         $prefix   = $settings->prefix;
-
-        if (!empty($prefix)) {
-            $prefix .= ' ';
-        }
+        $addtags  = $settings->tags;
 
         if (empty($instance) || empty($token) || $ids === []) {
             return '';
@@ -58,8 +56,28 @@ class Helper
             $rs = $blog->getPosts(['post_id' => $ids]);
             $rs->extend(Post::class);
             while ($rs->fetch()) {
+                $elements = [];
+                // Prefix
+                if (!empty($prefix)) {
+                    $elements[] = $prefix;
+                }
+                // Title
+                $elements[] = $rs->post_title;
+                // Tags
+                if ($addtags) {
+                    $tags = [];
+                    $meta = App::meta()->getMetaRecordset($rs->post_meta, 'tag');
+                    $meta->sort('meta_id_lower', 'asc');
+                    while ($meta->fetch()) {
+                        $tags[] = '#' . $meta->meta_id;
+                    }
+                    $elements[] = implode(' ', $tags);
+                }
+                // URL
+                $elements[] = $rs->getURL();
+
                 $payload = [
-                    'status'     => $prefix . $rs->post_title . ' ' . $rs->getURL(),
+                    'status'     => implode(' ', $elements),
                     'visibility' => 'public',       // public, unlisted, private, direct
                 ];
                 HttpClient::quickPost($uri, $payload);

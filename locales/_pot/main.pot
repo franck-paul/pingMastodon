@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-25 14:03+0200\n"
+"POT-Creation-Date: 2024-01-26 10:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/pingMastodon/src/Backend.php:29
-#: ../git-plugins/pingMastodon/src/Backend.php:41
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:34
+#: ../git-plugins/pingMastodon/src/Backend.php:25
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:32
 #: ../git-plugins/pingMastodon/src/BackendBehaviors.php:47
 #: ../git-plugins/pingMastodon/src/Manage.php:89
 msgid "Ping Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Backend.php:29
-#: ../git-plugins/pingMastodon/src/Manage.php:84
+#: ../git-plugins/pingMastodon/src/Backend.php:25
 msgid "pingMastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:34
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:32
 #: ../git-plugins/pingMastodon/src/BackendBehaviors.php:47
 msgid "Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:66
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:73
 msgid "All entries have been ping to Mastodon."
 msgstr ""
 
@@ -55,5 +53,9 @@ msgid "Status prefix:"
 msgstr ""
 
 #: ../git-plugins/pingMastodon/src/Manage.php:138
+msgid "Include tags"
+msgstr ""
+
+#: ../git-plugins/pingMastodon/src/Manage.php:143
 msgid "Save"
 msgstr ""

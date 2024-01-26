@@ -56,6 +56,7 @@ class Manage extends Process
                 $settings->put('instance', trim(Html::escapeHTML($_POST['pm_instance'])));
                 $settings->put('token', trim(Html::escapeHTML($_POST['pm_token'])));
                 $settings->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
+                $settings->put('tags', !empty($_POST['pm_tags']));
 
                 App::blog()->triggerBlog();
 
@@ -130,6 +131,11 @@ class Manage extends Process
                         ->value(Html::escapeHTML((string) $settings->prefix))
                         ->required(true)
                         ->label((new Label(__('Status prefix:'), Label::OUTSIDE_TEXT_BEFORE))),
+                ]),
+                (new Para())->items([
+                    (new Checkbox('pm_tags', (bool) $settings->tags))
+                        ->value(1)
+                        ->label((new Label(__('Include tags'), Label::INSIDE_TEXT_AFTER))),
                 ]),
                 // Submit
                 (new Para())->items([
