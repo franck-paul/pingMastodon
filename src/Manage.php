@@ -93,7 +93,7 @@ class Manage extends Process
 
         // Form
         echo
-        (new Form('a11y_params'))
+        (new Form('ping_mastodon_params'))
             ->action(App::backend()->getPageURL())
             ->method('post')
             ->fields([
