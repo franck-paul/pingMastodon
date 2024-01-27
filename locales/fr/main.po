@@ -36,7 +36,7 @@ msgid "Activate pingMastodon plugin"
 msgstr "Activer le plugin pingMastodon"
 
 msgid "Mastodon instance:"
-msgstr "Instance mastodon :"
+msgstr "Instance Mastodon :"
 
 msgid "Application token:"
 msgstr "Jeton applicatif :"
