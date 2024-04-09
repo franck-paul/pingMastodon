@@ -69,7 +69,7 @@ class Helper
                     $meta = App::meta()->getMetaRecordset($rs->post_meta, 'tag');
                     $meta->sort('meta_id_lower', 'asc');
                     while ($meta->fetch()) {
-                        $tags[] = '#' . $meta->meta_id;
+                        $tags[] = '#' . str_replace(' ', '', $meta->meta_id);
                     }
                     $elements[] = implode(' ', $tags);
                 }
