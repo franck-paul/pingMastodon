@@ -106,11 +106,9 @@ class Manage extends Process
         $modes = [];
         $i     = 0;
         foreach ($tags_mode_options as $k => $v) {
-            $modes[] = (new Para())->items([
-                (new Radio(['pm_tags_mode', 'pm_tags_mode-' . $i], $settings->tags_mode == $k))
+            $modes[] = (new Radio(['pm_tags_mode', 'pm_tags_mode-' . $i], $settings->tags_mode == $k))
                     ->value($k)
-                    ->label((new Label($v, Label::INSIDE_TEXT_AFTER))),
-            ]);
+                    ->label((new Label($v, Label::INSIDE_TEXT_AFTER)));
             ++$i;
         }
 
