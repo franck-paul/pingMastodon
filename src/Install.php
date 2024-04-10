@@ -40,7 +40,8 @@ class Install extends Process
             $settings->put('instance', '', App::blogWorkspace()::NS_STRING, 'Instance URL', false, true);
             $settings->put('token', '', App::blogWorkspace()::NS_STRING, 'App token', false, true);
             $settings->put('prefix', '', App::blogWorkspace()::NS_STRING, 'Status prefix', false, true);
-            $settings->put('tags', false, App::blogWorkspace()::NS_BOOL, 'Active', false, true);
+            $settings->put('tags', false, App::blogWorkspace()::NS_BOOL, 'Include tags', false, true);
+            $settings->put('tags_mode', My::TAGS_MODE_PASCALCASE, App::blogWorkspace()::NS_INT, 'Tags conversion mode', false, true);
         } catch (Exception $exception) {
             App::error()->add($exception->getMessage());
         }
