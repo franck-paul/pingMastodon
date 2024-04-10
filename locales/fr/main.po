@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-26 10:10+0100\n"
+"POT-Creation-Date: 2024-04-10 08:26+0200\n"
 "PO-Revision-Date: 2023-05-18 13:09+0000\n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>, 2024\n"
 "Language-Team: French (https://app.transifex.com/open-time/teams/109573/fr/)\n"
@@ -32,6 +32,26 @@ msgstr "Mastodon"
 msgid "All entries have been ping to Mastodon."
 msgstr "Toutes les entrées ont été signalées sur Mastodon."
 
+msgid "No conversion"
+msgstr "Pas de conversion"
+
+msgid "Spaces will be removed"
+msgstr "Les espaces seront supprimées des mots-clés"
+
+msgid ""
+"Spaces will be removed and tag will then be convert to "
+"<samp>camelCase</samp>"
+msgstr ""
+"Les espaces seront supprimées des mots-clés et ils seront convertis en "
+"<samp>camelCase</samp>."
+
+msgid ""
+"Spaces will be removed and tag will then be convert to "
+"<samp>PascalCase</samp>"
+msgstr ""
+"Les espaces seront supprimées des mots-clés et ils seront convertis en "
+"<samp>PascalCase</samp>."
+
 msgid "Activate pingMastodon plugin"
 msgstr "Activer le plugin pingMastodon"
 
@@ -46,6 +66,9 @@ msgstr "Préfixe de statut :"
 
 msgid "Include tags"
 msgstr "Inclure les mots-clés"
+
+msgid "Tags conversion mode:"
+msgstr "Mode de conversion des mots-clés :"
 
 msgid "Save"
 msgstr "Enregistrer"
