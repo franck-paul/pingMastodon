@@ -58,12 +58,8 @@ class Helper
             $rs->extend(Post::class);
             while ($rs->fetch()) {
                 $elements = [];
-                // Prefix
-                if (!empty($prefix)) {
-                    $elements[] = $prefix;
-                }
-                // Title
-                $elements[] = $rs->post_title;
+                // [Prefix] Title
+                $elements[] = (!empty($prefix) ? $prefix . ' ' : '') . $rs->post_title;
                 // Tags
                 if ($addtags) {
                     $tags = [];
@@ -78,7 +74,7 @@ class Helper
                 $elements[] = $rs->getURL();
 
                 $payload = [
-                    'status'     => implode(' ', $elements),
+                    'status'     => implode("\n", $elements),
                     'visibility' => 'public',       // public, unlisted, private, direct
                 ];
                 HttpClient::quickPost($uri, $payload);
