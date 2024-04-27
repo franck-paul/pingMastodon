@@ -72,10 +72,10 @@ class Helper
                     while ($meta->fetch()) {
                         $tags[] = '#' . self::convertTag($meta->meta_id, $mode);
                     }
-                    $elements[] = implode(' ', $tags);
+                    $elements[] = "\n" . implode(' ', array_slice($tags, 1));
                 }
                 // URL
-                $elements[] = $rs->getURL();
+                $elements[] = "\n" . $rs->getURL();
 
                 $payload = [
                     'status'     => implode(' ', $elements),
