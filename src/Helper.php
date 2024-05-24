@@ -66,9 +66,12 @@ class Helper
                 $references = [];
                 // Categories
                 if ($addcats) {
-                    $rscats = App::categories()->getParents((int) $rs->post_id, ['cat_title']);
-                    while ($rscats->fetch()) {
-                        $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
+                    if ($rs->cat_id) {
+                        $rscats = App::blog()->getCategoryParents((int) $rs->cat_id, ['cat_title']);
+                        while ($rscats->fetch()) {
+                            $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
+                        }
+                        $references[] = '#' . self::convertRef($rs->cat_title, $catsmode);
                     }
                 }
                 // Tags
