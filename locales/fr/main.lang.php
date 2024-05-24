@@ -24,4 +24,7 @@ L10n::$locales['Application token:'] = 'Jeton applicatif :';
 L10n::$locales['Status prefix:'] = 'Préfixe de statut :';
 L10n::$locales['Include tags'] = 'Inclure les mots-clés';
 L10n::$locales['Tags conversion mode:'] = 'Mode de conversion des mots-clés :';
+L10n::$locales['Include categories'] = 'Inclure les catégories';
+L10n::$locales['Will include category\'s parents'] = 'Inclura les catégories parentes de la catégorie';
+L10n::$locales['Categories conversion mode:'] = 'Mode de conversion des catégories :';
 L10n::$locales['Save'] = 'Enregistrer';

@@ -24,4 +24,7 @@ L10n::$locales['Application token:'] = '';
 L10n::$locales['Status prefix:'] = '';
 L10n::$locales['Include tags'] = '';
 L10n::$locales['Tags conversion mode:'] = '';
+L10n::$locales['Include categories'] = '';
+L10n::$locales['Will include category\'s parents'] = '';
+L10n::$locales['Categories conversion mode:'] = '';
 L10n::$locales['Save'] = '';
