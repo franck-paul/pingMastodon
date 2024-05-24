@@ -41,7 +41,9 @@ class Install extends Process
             $settings->put('token', '', App::blogWorkspace()::NS_STRING, 'App token', false, true);
             $settings->put('prefix', '', App::blogWorkspace()::NS_STRING, 'Status prefix', false, true);
             $settings->put('tags', false, App::blogWorkspace()::NS_BOOL, 'Include tags', false, true);
-            $settings->put('tags_mode', My::TAGS_MODE_CAMELCASE, App::blogWorkspace()::NS_INT, 'Tags conversion mode', false, true);
+            $settings->put('tags_mode', My::REFS_MODE_CAMELCASE, App::blogWorkspace()::NS_INT, 'Tags conversion mode', false, true);
+            $settings->put('cats', false, App::blogWorkspace()::NS_BOOL, 'Include categories as tag', false, true);
+            $settings->put('cats_mode', My::REFS_MODE_CAMELCASE, App::blogWorkspace()::NS_INT, 'Categories conversion mode', false, true);
         } catch (Exception $exception) {
             App::error()->add($exception->getMessage());
         }

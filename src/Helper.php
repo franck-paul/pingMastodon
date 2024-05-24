@@ -39,7 +39,9 @@ class Helper
         $token    = $settings->token;
         $prefix   = $settings->prefix;
         $addtags  = $settings->tags;
-        $mode     = $settings->tags_mode;
+        $tagsmode = $settings->tags_mode;
+        $addcats  = $settings->cats;
+        $catsmode = $settings->cats_mode;
 
         if (empty($instance) || empty($token) || $ids === []) {
             return '';
@@ -60,15 +62,26 @@ class Helper
                 $elements = [];
                 // [Prefix] Title
                 $elements[] = (!empty($prefix) ? $prefix . ' ' : '') . $rs->post_title;
+                // References (categories, tags)
+                $references = [];
+                // Categories
+                if ($addcats) {
+                    $rscats = App::categories()->getParents((int) $rs->post_id, ['cat_title']);
+                    while ($rscats->fetch()) {
+                        $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
+                    }
+                }
                 // Tags
                 if ($addtags) {
-                    $tags = [];
                     $meta = App::meta()->getMetaRecordset($rs->post_meta, 'tag');
                     $meta->sort('meta_id_lower', 'asc');
                     while ($meta->fetch()) {
-                        $tags[] = '#' . self::convertTag($meta->meta_id, $mode);
+                        $references[] = '#' . self::convertRef($meta->meta_id, $tagsmode);
                     }
-                    $elements[] = implode(' ', $tags);
+                }
+                $references = array_unique($references);
+                if (count($references)) {
+                    $elements[] = implode(' ', $references);
                 }
                 // URL
                 $elements[] = $rs->getURL();
@@ -88,41 +101,41 @@ class Helper
     /**
      * Convert a tag depending on mode
      *
-     * @param      string  $tag    The tag
-     * @param      int     $mode   The mode
+     * @param      string  $reference   The tag
+     * @param      int     $mode        The mode
      *
      * @return     string
      */
-    private static function convertTag(string $tag, int $mode = My::TAGS_MODE_NONE): string
+    private static function convertRef(string $reference, int $mode = My::REFS_MODE_NONE): string
     {
-        if (strtoupper($tag) === $tag) {
+        if (strtoupper($reference) === $reference) {
             // Don't touch all uppercased tag
-            return $tag;
+            return $reference;
         }
 
         return match ($mode) {
             // Remove spaces
-            My::TAGS_MODE_NOSPACE => str_replace(
+            My::REFS_MODE_NOSPACE => str_replace(
                 ' ',
                 '',
-                $tag
+                $reference
             ),
             // Uppercase each words and remove spaces
-            My::TAGS_MODE_PASCALCASE => str_replace(
+            My::REFS_MODE_PASCALCASE => str_replace(
                 ' ',
                 '',
-                ucwords(strtolower($tag))
+                ucwords(strtolower($reference))
             ),
             // Uppercase each words but the first and remove spaces
-            My::TAGS_MODE_CAMELCASE => lcfirst(
+            My::REFS_MODE_CAMELCASE => lcfirst(
                 str_replace(
                     ' ',
                     '',
-                    ucwords(strtolower($tag))
+                    ucwords(strtolower($reference))
                 )
             ),
-            My::TAGS_MODE_NONE => $tag,
-            default            => $tag,
+            My::REFS_MODE_NONE => $reference,
+            default            => $reference,
         };
     }
 }

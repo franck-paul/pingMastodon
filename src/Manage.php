@@ -24,6 +24,7 @@ use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
 use Dotclear\Helper\Html\Form\Legend;
+use Dotclear\Helper\Html\Form\Note;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Radio;
 use Dotclear\Helper\Html\Form\Submit;
@@ -61,6 +62,8 @@ class Manage extends Process
                 $settings->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
                 $settings->put('tags', !empty($_POST['pm_tags']));
                 $settings->put('tags_mode', (int) $_POST['pm_tags_mode'], App::blogWorkspace()::NS_INT);
+                $settings->put('cats', !empty($_POST['pm_cats']));
+                $settings->put('cats_mode', (int) $_POST['pm_cats_mode'], App::blogWorkspace()::NS_INT);
 
                 App::blog()->triggerBlog();
 
@@ -97,16 +100,23 @@ class Manage extends Process
 
         // Form
 
-        $tags_mode_options = [
-            My::TAGS_MODE_NONE       => __('No conversion'),
-            My::TAGS_MODE_NOSPACE    => __('Spaces will be removed'),
-            My::TAGS_MODE_CAMELCASE  => __('Spaces will be removed and tag will then be convert to <samp>camelCase</samp>'),
-            My::TAGS_MODE_PASCALCASE => __('Spaces will be removed and tag will then be convert to <samp>PascalCase</samp>'),
+        $references_mode_options = [
+            My::REFS_MODE_NONE       => __('No conversion'),
+            My::REFS_MODE_NOSPACE    => __('Spaces will be removed'),
+            My::REFS_MODE_CAMELCASE  => __('Spaces will be removed and tag will then be convert to <samp>camelCase</samp>'),
+            My::REFS_MODE_PASCALCASE => __('Spaces will be removed and tag will then be convert to <samp>PascalCase</samp>'),
         ];
-        $modes = [];
-        $i     = 0;
-        foreach ($tags_mode_options as $k => $v) {
-            $modes[] = (new Radio(['pm_tags_mode', 'pm_tags_mode-' . $i], $settings->tags_mode == $k))
+        $tagsmodes = [];
+        $catsmodes = [];
+        $tags_mode = $settings->tags_mode ?? My::REFS_MODE_CAMELCASE;
+        $cats_mode = $settings->cats_mode ?? My::REFS_MODE_CAMELCASE;
+
+        $i = 0;
+        foreach ($references_mode_options as $k => $v) {
+            $tagsmodes[] = (new Radio(['pm_tags_mode', 'pm_tags_mode-' . $i], $tags_mode == $k))
+                    ->value($k)
+                    ->label((new Label($v, Label::INSIDE_TEXT_AFTER)));
+            $catsmodes[] = (new Radio(['pm_cats_mode', 'pm_cats_mode-' . $i], $cats_mode == $k))
                     ->value($k)
                     ->label((new Label($v, Label::INSIDE_TEXT_AFTER)));
             ++$i;
@@ -163,7 +173,23 @@ class Manage extends Process
                     (new Para())->class('pretty-title')->items([
                         (new Text(null, __('Tags conversion mode:'))),
                     ]),
-                    ...$modes,
+                    ...$tagsmodes,
+                ]),
+                (new Fieldset())
+                ->legend(new Legend(__('Categories')))
+                ->fields([
+                    (new Para())->items([
+                        (new Checkbox('pm_cats', (bool) $settings->cats))
+                            ->value(1)
+                            ->label((new Label(__('Include categories'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                    (new Note())
+                        ->class('form-note')
+                        ->text(__('Will include category\'s parents')),
+                    (new Para())->class('pretty-title')->items([
+                        (new Text(null, __('Categories conversion mode:'))),
+                    ]),
+                    ...$catsmodes,
                 ]),
                 // Submit
                 (new Para())->items([
