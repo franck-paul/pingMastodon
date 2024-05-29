@@ -14,7 +14,7 @@ $this->registerModule(
     'Ping Mastodon',
     'Ping Mastodon',
     'Franck Paul',
-    '4.10',
+    '4.10.1',
     [
         'requires'    => [['core', '2.28']],
         'type'        => 'plugin',
