@@ -67,7 +67,7 @@ class Helper
                 // Categories
                 if ($addcats) {
                     if ($rs->cat_id) {
-                        $rscats = App::blog()->getCategoryParents((int) $rs->cat_id, ['cat_title']);
+                        $rscats = App::blog()->getCategoryParents((int) $rs->cat_id);
                         while ($rscats->fetch()) {
                             $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
                         }
@@ -114,7 +114,7 @@ class Helper
         // Mastodon Hashtags can contain alphanumeric characters and underscores,
         // Replace other (but spaces) with underscores.
         // \pL stands for any character in any language
-        $reference = preg_replace('/[^\pL\s\d]/mu', '_', $reference);
+        $reference = (string) preg_replace('/[^\pL\s\d]/mu', '_', $reference);
 
         if (strtoupper($reference) === $reference) {
             // Don't touch all uppercased tag
