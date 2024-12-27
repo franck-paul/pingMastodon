@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief pingMastodon, a plugin for Dotclear 2
  *
@@ -61,18 +62,16 @@ class Helper
             while ($rs->fetch()) {
                 $elements = [];
                 // [Prefix] Title
-                $elements[] = (!empty($prefix) ? $prefix . ' ' : '') . $rs->post_title;
+                $elements[] = (empty($prefix) ? '' : $prefix . ' ') . $rs->post_title;
                 // References (categories, tags)
                 $references = [];
                 // Categories
-                if ($addcats) {
-                    if ($rs->cat_id) {
-                        $rscats = App::blog()->getCategoryParents((int) $rs->cat_id);
-                        while ($rscats->fetch()) {
-                            $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
-                        }
-                        $references[] = '#' . self::convertRef($rs->cat_title, $catsmode);
+                if ($addcats && $rs->cat_id) {
+                    $rscats = App::blog()->getCategoryParents((int) $rs->cat_id);
+                    while ($rscats->fetch()) {
+                        $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
                     }
+                    $references[] = '#' . self::convertRef($rs->cat_title, $catsmode);
                 }
                 // Tags
                 if ($addtags) {
@@ -83,7 +82,7 @@ class Helper
                     }
                 }
                 $references = array_unique($references);
-                if (count($references)) {
+                if ($references !== []) {
                     $elements[] = implode(' ', $references);
                 }
                 // URL
@@ -106,8 +105,6 @@ class Helper
      *
      * @param      string  $reference   The tag
      * @param      int     $mode        The mode
-     *
-     * @return     string
      */
     private static function convertRef(string $reference, int $mode = My::REFS_MODE_NONE): string
     {
