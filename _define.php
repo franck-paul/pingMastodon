@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief pingMastodon, a plugin for Dotclear 2
  *
@@ -16,7 +17,7 @@ $this->registerModule(
     'Franck Paul',
     '4.10.3',
     [
-        'requires'    => [['core', '2.28']],
+        'requires'    => [['core', '2.33']],
         'type'        => 'plugin',
         'permissions' => 'My',
         'details'     => 'https://open-time.net/docs/plugins/pingMastodon',
