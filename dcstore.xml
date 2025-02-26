@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="pingMastodon">
     <name>pingMastodon</name>
-    <version>5.1</version>
+    <version>5.2</version>
     <author>Franck Paul</author>
     <desc>Ping Bluesky</desc>
-    <date>2003-08-13T13:42:00+0100</date>
-    <file>https://github.com/franck-paul/pingMastodon/releases/download/5.1/plugin-pingMastodon-5.1.zip</file>
+    <date>2025-02-26T16:07:25+0100</date>
+    <file>https://github.com/franck-paul/pingMastodon/releases/download/5.2/plugin-pingMastodon-5.2.zip</file>
     <da:dcmin>2.33</da:dcmin>
     <da:details>https://open-time.net/?q=pingMastodon</da:details>
     <da:support>https://github.com/franck-paul/pingMastodon</da:support>
