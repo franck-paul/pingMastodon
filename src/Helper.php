@@ -49,11 +49,11 @@ class Helper
         }
 
         // Prepare instance URI
-        if (!parse_url($instance, PHP_URL_HOST)) {
+        if (!parse_url((string) $instance, PHP_URL_HOST)) {
             $instance = 'https://' . $instance;
         }
 
-        $uri = rtrim($instance, '/') . '/api/v1/statuses?access_token=' . $token;
+        $uri = rtrim((string) $instance, '/') . '/api/v1/statuses?access_token=' . $token;
 
         try {
             // Get posts information
