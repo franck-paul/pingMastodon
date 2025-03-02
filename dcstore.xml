@@ -3,7 +3,7 @@
     <name>pingMastodon</name>
     <version>5.2</version>
     <author>Franck Paul</author>
-    <desc>Ping Bluesky</desc>
+    <desc>Ping Mastodon</desc>
     <date>2025-02-26T16:07:25+0100</date>
     <file>https://github.com/franck-paul/pingMastodon/releases/download/5.2/plugin-pingMastodon-5.2.zip</file>
     <da:dcmin>2.33</da:dcmin>
