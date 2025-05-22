@@ -24,5 +24,6 @@ $this->registerModule(
         'details'     => 'https://open-time.net/docs/plugins/pingMastodon',
         'support'     => 'https://github.com/franck-paul/pingMastodon',
         'repository'  => 'https://raw.githubusercontent.com/franck-paul/pingMastodon/main/dcstore.xml',
+        'license'     => 'gpl2',
     ]
 );
