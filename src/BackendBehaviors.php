@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
-use arrayObject;
 use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
 use Dotclear\Core\Backend\Notices;
@@ -55,9 +54,8 @@ class BackendBehaviors
 
     /**
      * @param      ActionsPosts|PagesBackendActions     $ap     Actions
-     * @param      ArrayObject<string, mixed>           $post   The post
      */
-    public static function adminPingMastodon(ActionsPosts|PagesBackendActions $ap, arrayObject $post): void
+    public static function adminPingMastodon(ActionsPosts|PagesBackendActions $ap): void
     {
         $rs = $ap->getRS();
         if ($rs->rows()) {

@@ -92,6 +92,9 @@ class Helper
                     'status'     => implode("\n", $elements),
                     'visibility' => 'public',       // public, unlisted, private, direct
                 ];
+
+                // Check if an image is avalaible, and if so send it and get its media_id
+
                 HttpClient::quickPost($uri, $payload);
             }
         } catch (Exception) {
