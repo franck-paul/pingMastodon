@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-24 16:13+0200\n"
+"POT-Creation-Date: 2025-07-23 18:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/pingMastodon/src/Backend.php:25
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:32
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:47
-#: ../git-plugins/pingMastodon/src/Manage.php:96
-msgid "Ping Mastodon"
+#: ../git-plugins/pingMastodon/src/Backend.php:26
+msgid "pingMastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Backend.php:25
-msgid "pingMastodon"
+#: ../git-plugins/pingMastodon/src/Backend.php:27
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:32
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:47
+#: ../git-plugins/pingMastodon/src/Manage.php:97
+msgid "Ping Mastodon"
 msgstr ""
 
 #: ../git-plugins/pingMastodon/src/BackendBehaviors.php:32
@@ -32,62 +32,72 @@ msgstr ""
 msgid "Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:73
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:72
 msgid "All entries have been ping to Mastodon."
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:104
+#: ../git-plugins/pingMastodon/src/Manage.php:105
+#: ../git-plugins/pingMastodon/src/Manage.php:111
 msgid "No conversion"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:105
+#: ../git-plugins/pingMastodon/src/Manage.php:106
+#: ../git-plugins/pingMastodon/src/Manage.php:112
 msgid "Spaces will be removed"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:106
+#: ../git-plugins/pingMastodon/src/Manage.php:107
 msgid "Spaces will be removed and tag will then be convert to <samp>camelCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:107
+#: ../git-plugins/pingMastodon/src/Manage.php:108
 msgid "Spaces will be removed and tag will then be convert to <samp>PascalCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:133
+#: ../git-plugins/pingMastodon/src/Manage.php:113
+msgid "Spaces will be removed and category name will then be convert to <samp>camelCase</samp>"
+msgstr ""
+
+#: ../git-plugins/pingMastodon/src/Manage.php:114
+msgid "Spaces will be removed and category name will then be convert to <samp>PascalCase</samp>"
+msgstr ""
+
+#: ../git-plugins/pingMastodon/src/Manage.php:143
 msgid "Activate pingMastodon plugin"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:142
+#: ../git-plugins/pingMastodon/src/Manage.php:152
 msgid "Mastodon instance:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:153
+#: ../git-plugins/pingMastodon/src/Manage.php:163
 msgid "Application token:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:163
+#: ../git-plugins/pingMastodon/src/Manage.php:172
 msgid "Status prefix:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:171
+#: ../git-plugins/pingMastodon/src/Manage.php:180
 msgid "Include tags"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:174
+#: ../git-plugins/pingMastodon/src/Manage.php:183
 msgid "Tags conversion mode:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:184
+#: ../git-plugins/pingMastodon/src/Manage.php:193
 msgid "Include categories"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:188
+#: ../git-plugins/pingMastodon/src/Manage.php:197
 msgid "Will include category's parents"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:190
+#: ../git-plugins/pingMastodon/src/Manage.php:199
 msgid "Categories conversion mode:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:197
+#: ../git-plugins/pingMastodon/src/Manage.php:206
 msgid "Save"
 msgstr ""
