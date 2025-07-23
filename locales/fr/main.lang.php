@@ -10,14 +10,16 @@
 
 use Dotclear\Helper\L10n;
 
-L10n::$locales['Ping Mastodon'] = 'Ping Mastodon';
 L10n::$locales['pingMastodon'] = 'pingMastodon';
+L10n::$locales['Ping Mastodon'] = 'Ping Mastodon';
 L10n::$locales['Mastodon'] = 'Mastodon';
 L10n::$locales['All entries have been ping to Mastodon.'] = 'Toutes les entrées ont été signalées sur Mastodon.';
 L10n::$locales['No conversion'] = 'Pas de conversion';
 L10n::$locales['Spaces will be removed'] = 'Les espaces seront supprimées des mots-clés';
 L10n::$locales['Spaces will be removed and tag will then be convert to <samp>camelCase</samp>'] = 'Les espaces seront supprimées des mots-clés et ils seront convertis en <samp>camelCase</samp>.';
 L10n::$locales['Spaces will be removed and tag will then be convert to <samp>PascalCase</samp>'] = 'Les espaces seront supprimées des mots-clés et ils seront convertis en <samp>PascalCase</samp>.';
+L10n::$locales['Spaces will be removed and category name will then be convert to <samp>camelCase</samp>'] = 'Les espaces seront supprimés et le nom de la catégorie sera converti en <samp>camelCase</samp>.';
+L10n::$locales['Spaces will be removed and category name will then be convert to <samp>PascalCase</samp>'] = 'Les espaces seront supprimés et le nom de la catégorie sera converti en <samp>PascalCase</samp>.';
 L10n::$locales['Activate pingMastodon plugin'] = 'Activer le plugin pingMastodon';
 L10n::$locales['Mastodon instance:'] = 'Instance Mastodon :';
 L10n::$locales['Application token:'] = 'Jeton applicatif :';
