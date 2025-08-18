@@ -28,6 +28,7 @@ use Dotclear\Helper\Html\Form\Legend;
 use Dotclear\Helper\Html\Form\Note;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Radio;
+use Dotclear\Helper\Html\Form\Select;
 use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Html;
@@ -61,6 +62,7 @@ class Manage extends Process
                 $settings->put('instance', trim(Html::escapeHTML($_POST['pm_instance'])));
                 $settings->put('token', trim(Html::escapeHTML($_POST['pm_token'])));
                 $settings->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
+                $settings->put('visibility', trim(Html::escapeHTML($_POST['pm_visibility'])));
                 $settings->put('tags', !empty($_POST['pm_tags']));
                 $settings->put('tags_mode', (int) $_POST['pm_tags_mode'], App::blogWorkspace()::NS_INT);
                 $settings->put('cats', !empty($_POST['pm_cats']));
@@ -133,6 +135,13 @@ class Manage extends Process
             ++$i;
         }
 
+        $visibilities = [
+            __('Public')   => 'public',
+            __('Unlisted') => 'unlisted',
+            __('Private')  => 'private',
+            __('Direct')   => 'direct',
+        ];
+
         echo
         (new Form('ping_mastodon_params'))
             ->action(App::backend()->getPageURL())
@@ -171,6 +180,12 @@ class Manage extends Process
                         ->maxlength(128)
                         ->value(Html::escapeHTML((string) $settings->prefix))
                         ->label((new Label(__('Status prefix:'), Label::OUTSIDE_TEXT_BEFORE))),
+                ]),
+                (new Para())->items([
+                    (new Select('pm_visibility'))
+                        ->items($visibilities)
+                        ->default(Html::escapeHTML((string) ($settings->visibility ?? 'public')))
+                        ->label(new Label(__('Status visibility:'), Label::OUTSIDE_LABEL_BEFORE)),
                 ]),
                 (new Fieldset())
                 ->legend(new Legend(__('Tags')))

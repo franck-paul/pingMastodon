@@ -36,13 +36,14 @@ class Helper
             return '';
         }
 
-        $instance = $settings->instance;
-        $token    = $settings->token;
-        $prefix   = $settings->prefix;
-        $addtags  = $settings->tags;
-        $tagsmode = $settings->tags_mode;
-        $addcats  = $settings->cats;
-        $catsmode = $settings->cats_mode;
+        $instance   = $settings->instance;
+        $token      = $settings->token;
+        $prefix     = $settings->prefix;
+        $visibility = $settings->visibility;
+        $addtags    = $settings->tags;
+        $tagsmode   = $settings->tags_mode;
+        $addcats    = $settings->cats;
+        $catsmode   = $settings->cats_mode;
 
         if (empty($instance) || empty($token) || $ids === []) {
             return '';
@@ -90,7 +91,7 @@ class Helper
 
                 $payload = [
                     'status'     => implode("\n", $elements),
-                    'visibility' => 'public',       // public, unlisted, private, direct
+                    'visibility' => $visibility ?? 'public',
                 ];
 
                 // Check if an image is avalaible, and if so send it and get its media_id
