@@ -15,13 +15,76 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\pingMastodon;
 
+use ArrayObject;
 use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
 use Dotclear\Core\Backend\Notices;
+use Dotclear\Database\Cursor;
+use Dotclear\Database\MetaRecord;
+use Dotclear\Helper\Html\Form\Div;
+use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Para;
+use Dotclear\Helper\Html\Form\Text;
+use Dotclear\Helper\Html\Form\Textarea;
+use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\pages\BackendActions as PagesBackendActions;
 
 class BackendBehaviors
 {
+    /**
+     * Add ping Mastodon fieldset in entry sidebar.
+     *
+     * @param   ArrayObject<string, mixed>     $main       The main part of the entry form
+     * @param   ArrayObject<string, mixed>     $sidebar    The sidebar part of the entry form
+     * @param   MetaRecord                     $post       The post
+     */
+    public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): string
+    {
+        $settings = My::settings();
+        if (!$settings->active) {
+            return '';
+        }
+
+        if (!empty($_POST['ping-mastodon-catchphrase'])) {
+            $catchphrase = $_POST['ping-mastodon-catchphrase'];
+        } else {
+            $catchphrase = $post instanceof MetaRecord ? Helper::getCatchPhrase((int) $post->post_id) : '';
+        }
+
+        $div = (new Div())
+            ->items([
+                (new Text('h5', __('Ping Mastodon')))->class('ping-mastodon'),
+                (new Para())
+                    ->class('ping-mastodon')
+                    ->items([
+                        (new Textarea('ping-mastodon-catchphrase', $catchphrase))
+                            ->rows(4)
+                            ->cols(25)
+                            ->maxlength(255)
+                            ->label(new Label(__('Catchphrase:'), Label::OL_TF)),
+                    ]),
+            ])
+        ->render();
+
+        $sidebar['options-box']['items']['ping_mastodon'] = $div;
+
+        return '';
+    }
+
+    /**
+     * @param   Cursor  $cur        The current
+     * @param   mixed   $post_id    The post identifier
+     */
+    public static function setCatchPhrase(Cursor $cur, $post_id): void
+    {
+        if (!My::settings()->active) {
+            return;
+        }
+
+        $catchphrase = $_POST['ping-mastodon-catchphrase'] ?? '';
+        Helper::setCatchPhrase((int) $post_id, Html::escapeHTML($catchphrase));
+    }
+
     public static function adminPostsActions(ActionsPosts $ap): string
     {
         // Add menuitem in actions dropdown list

@@ -44,6 +44,7 @@ class Install
             $settings->put('token', '', App::blogWorkspace()::NS_STRING, 'App token', false, true);
             $settings->put('prefix', '', App::blogWorkspace()::NS_STRING, 'Status prefix', false, true);
             $settings->put('visibilty', '', App::blogWorkspace()::NS_STRING, 'Visibility', false, true);
+            $settings->put('catchphrase', false, App::blogWorkspace()::NS_BOOL, 'Use catchphrase if available', false, true);
             $settings->put('tags', false, App::blogWorkspace()::NS_BOOL, 'Include tags', false, true);
             $settings->put('tags_mode', My::REFS_MODE_CAMELCASE, App::blogWorkspace()::NS_INT, 'Tags conversion mode', false, true);
             $settings->put('cats', false, App::blogWorkspace()::NS_BOOL, 'Include categories as tag', false, true);

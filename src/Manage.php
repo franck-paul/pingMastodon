@@ -65,6 +65,7 @@ class Manage
                 $settings->put('token', trim(Html::escapeHTML($_POST['pm_token'])));
                 $settings->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
                 $settings->put('visibility', trim(Html::escapeHTML($_POST['pm_visibility'])));
+                $settings->put('catchphrase', !empty($_POST['pm_catchphrase']));
                 $settings->put('tags', !empty($_POST['pm_tags']));
                 $settings->put('tags_mode', (int) $_POST['pm_tags_mode'], App::blogWorkspace()::NS_INT);
                 $settings->put('cats', !empty($_POST['pm_cats']));
@@ -188,6 +189,18 @@ class Manage
                         ->items($visibilities)
                         ->default(Html::escapeHTML((string) ($settings->visibility ?? 'public')))
                         ->label(new Label(__('Status visibility:'), Label::OUTSIDE_LABEL_BEFORE)),
+                ]),
+                (new Fieldset())
+                ->legend(new Legend(__('Catchphrase')))
+                ->fields([
+                    (new Para())->items([
+                        (new Checkbox('pm_catchphrase', (bool) $settings->catchphrase))
+                            ->value(1)
+                            ->label((new Label(__('Use entry catchphrase if available'), Label::INSIDE_TEXT_AFTER))),
+                    ]),
+                    (new Note())
+                        ->class('form-note')
+                        ->text(__('The catchphrase is defined for each entry, see the options when creating/editing it.')),
                 ]),
                 (new Fieldset())
                 ->legend(new Legend(__('Tags')))

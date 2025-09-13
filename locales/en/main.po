@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-18 18:30+0200\n"
+"POT-Creation-Date: 2025-09-13 17:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,9 @@ msgid "pingMastodon"
 msgstr ""
 
 msgid "Ping Mastodon"
+msgstr ""
+
+msgid "Catchphrase:"
 msgstr ""
 
 msgid "Mastodon"
@@ -71,6 +74,15 @@ msgid "Status prefix:"
 msgstr ""
 
 msgid "Status visibility:"
+msgstr ""
+
+msgid "Catchphrase"
+msgstr ""
+
+msgid "Use entry catchphrase if available"
+msgstr ""
+
+msgid "The catchphrase is defined for each entry, see the options when creating/editing it."
 msgstr ""
 
 msgid "Include tags"

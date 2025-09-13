@@ -23,6 +23,8 @@ use Exception;
 
 class Helper
 {
+    protected const CATCHPHRASE_METATYPE = 'ping_mastodon_catchphrase';
+
     /**
      * Ping mastodon server
      *
@@ -61,9 +63,13 @@ class Helper
             $rs = $blog->getPosts(['post_id' => $ids]);
             $rs->extend(Post::class);
             while ($rs->fetch()) {
-                $elements = [];
-                // [Prefix] Title
-                $elements[] = (empty($prefix) ? '' : $prefix . ' ') . $rs->post_title;
+                $elements    = [];
+                $catchphrase = $settings->catchphrase ? self::getCatchPhrase((int) $rs->post_id) : '';
+                if ($catchphrase !== '') {
+                    $catchphrase .= "\n";
+                }
+                // [Prefix] [Catchphrase] Title
+                $elements[] = (empty($prefix) ? '' : $prefix . ' ') . $catchphrase . $rs->post_title;
                 // References (categories, tags)
                 $references = [];
                 // Categories
@@ -146,5 +152,43 @@ class Helper
             My::REFS_MODE_NONE => $reference,
             default            => $reference,
         };
+    }
+
+    public static function getCatchPhrase(int $post_id): string
+    {
+        ptrace(__METHOD__, __LINE__, $post_id);
+
+        if ($post_id === 0) {
+            return '';
+        }
+
+        $meta      = App::meta();
+        $post_meta = $meta->getMetadata([
+            'meta_type' => self::CATCHPHRASE_METATYPE,
+            'post_id'   => $post_id,
+        ]);
+        while ($post_meta->fetch()) {
+            ptrace(__METHOD__, __LINE__, $post_meta->meta_id);
+
+            // Return 1st found meta value
+            return $post_meta->meta_id;
+        }
+
+        return '';
+    }
+
+    public static function setCatchPhrase(int $post_id, string $catchphrase): void
+    {
+        ptrace(__METHOD__, __LINE__, $post_id, $catchphrase);
+
+        if ($post_id === 0) {
+            return;
+        }
+
+        $meta = App::meta();
+        $meta->delPostMeta($post_id, self::CATCHPHRASE_METATYPE);
+        if ($catchphrase !== '') {
+            $meta->setPostMeta($post_id, self::CATCHPHRASE_METATYPE, $catchphrase);
+        }
     }
 }

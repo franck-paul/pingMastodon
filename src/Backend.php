@@ -51,6 +51,14 @@ class Backend
             ]);
         }
 
+        App::behavior()->addBehaviors([
+            /* Add behavior callbacks for managing catchphrase */
+            'adminPostHeaders'     => fn (): string => My::jsLoad('post') . My::cssLoad('style'),
+            'adminPostFormItems'   => BackendBehaviors::adminPostFormItems(...),
+            'adminAfterPostCreate' => BackendBehaviors::setCatchPhrase(...),
+            'adminAfterPostUpdate' => BackendBehaviors::setCatchPhrase(...),
+        ]);
+
         return true;
     }
 }

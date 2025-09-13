@@ -12,6 +12,7 @@ use Dotclear\Helper\L10n;
 
 L10n::$locales['pingMastodon'] = '';
 L10n::$locales['Ping Mastodon'] = '';
+L10n::$locales['Catchphrase:'] = '';
 L10n::$locales['Mastodon'] = '';
 L10n::$locales['All entries have been ping to Mastodon.'] = '';
 L10n::$locales['No conversion'] = '';
@@ -29,6 +30,9 @@ L10n::$locales['Mastodon instance:'] = '';
 L10n::$locales['Application token:'] = '';
 L10n::$locales['Status prefix:'] = '';
 L10n::$locales['Status visibility:'] = '';
+L10n::$locales['Catchphrase'] = '';
+L10n::$locales['Use entry catchphrase if available'] = '';
+L10n::$locales['The catchphrase is defined for each entry, see the options when creating/editing it.'] = '';
 L10n::$locales['Include tags'] = '';
 L10n::$locales['Tags conversion mode:'] = '';
 L10n::$locales['Include categories'] = '';
