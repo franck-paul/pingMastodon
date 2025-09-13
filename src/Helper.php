@@ -156,8 +156,6 @@ class Helper
 
     public static function getCatchPhrase(int $post_id): string
     {
-        ptrace(__METHOD__, __LINE__, $post_id);
-
         if ($post_id === 0) {
             return '';
         }
@@ -168,8 +166,6 @@ class Helper
             'post_id'   => $post_id,
         ]);
         while ($post_meta->fetch()) {
-            ptrace(__METHOD__, __LINE__, $post_meta->meta_id);
-
             // Return 1st found meta value
             return $post_meta->meta_id;
         }
@@ -179,8 +175,6 @@ class Helper
 
     public static function setCatchPhrase(int $post_id, string $catchphrase): void
     {
-        ptrace(__METHOD__, __LINE__, $post_id, $catchphrase);
-
         if ($post_id === 0) {
             return;
         }
