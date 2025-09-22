@@ -18,7 +18,6 @@ namespace Dotclear\Plugin\pingMastodon;
 use ArrayObject;
 use Dotclear\App;
 use Dotclear\Core\Backend\Action\ActionsPosts;
-use Dotclear\Core\Backend\Notices;
 use Dotclear\Database\Cursor;
 use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Form\Div;
@@ -132,7 +131,7 @@ class BackendBehaviors
 
             if ($ids !== []) {
                 Helper::ping(App::blog(), $ids);
-                Notices::addSuccessNotice(__('All entries have been ping to Mastodon.'));
+                App::backend()->notices()->addSuccessNotice(__('All entries have been ping to Mastodon.'));
             }
 
             $ap->redirect(true);

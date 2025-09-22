@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\pingMastodon;
 
 use Dotclear\App;
-use Dotclear\Core\Backend\Notices;
-use Dotclear\Core\Backend\Page;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Fieldset;
 use Dotclear\Helper\Html\Form\Form;
@@ -73,7 +71,7 @@ class Manage
 
                 App::blog()->triggerBlog();
 
-                Notices::addSuccessNotice(__('Settings have been successfully updated.'));
+                App::backend()->notices()->addSuccessNotice(__('Settings have been successfully updated.'));
                 My::redirect();
             } catch (Exception $e) {
                 App::error()->add($e->getMessage());
@@ -94,15 +92,15 @@ class Manage
 
         $settings = My::settings();
 
-        Page::openModule(My::name());
+        App::backend()->page()->openModule(My::name());
 
-        echo Page::breadcrumb(
+        echo App::backend()->page()->breadcrumb(
             [
                 Html::escapeHTML(App::blog()->name()) => '',
                 __('Ping Mastodon')                   => '',
             ]
         );
-        echo Notices::getNotices();
+        echo App::backend()->notices()->getNotices();
 
         // Form
 
@@ -240,6 +238,6 @@ class Manage
             ])
         ->render();
 
-        Page::closeModule();
+        App::backend()->page()->closeModule();
     }
 }
