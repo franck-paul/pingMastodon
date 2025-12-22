@@ -30,6 +30,7 @@ L10n::$locales['Mastodon instance:'] = '';
 L10n::$locales['Application token:'] = '';
 L10n::$locales['Status prefix:'] = '';
 L10n::$locales['Status visibility:'] = '';
+L10n::$locales['Automatically ping when an entry is first published'] = '';
 L10n::$locales['Catchphrase'] = '';
 L10n::$locales['Use entry catchphrase if available'] = '';
 L10n::$locales['The catchphrase is defined for each entry, see the options when creating/editing it.'] = '';

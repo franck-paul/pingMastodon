@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-13 17:13+0200\n"
+"POT-Creation-Date: 2025-12-22 10:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,9 @@ msgid "Status prefix:"
 msgstr ""
 
 msgid "Status visibility:"
+msgstr ""
+
+msgid "Automatically ping when an entry is first published"
 msgstr ""
 
 msgid "Catchphrase"

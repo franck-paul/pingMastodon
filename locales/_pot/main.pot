@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-13 17:14+0200\n"
+"POT-Creation-Date: 2025-12-22 10:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,120 +21,124 @@ msgid "pingMastodon"
 msgstr ""
 
 #: ../git-plugins/pingMastodon/src/Backend.php:29
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:56
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:95
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:110
-#: ../git-plugins/pingMastodon/src/Manage.php:102
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:55
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:94
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:109
+#: ../git-plugins/pingMastodon/src/Manage.php:101
 msgid "Ping Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:64
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:63
 msgid "Catchphrase:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:95
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:110
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:94
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:109
 msgid "Mastodon"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:135
+#: ../git-plugins/pingMastodon/src/BackendBehaviors.php:134
 msgid "All entries have been ping to Mastodon."
+msgstr ""
+
+#: ../git-plugins/pingMastodon/src/Manage.php:109
+#: ../git-plugins/pingMastodon/src/Manage.php:115
+msgid "No conversion"
 msgstr ""
 
 #: ../git-plugins/pingMastodon/src/Manage.php:110
 #: ../git-plugins/pingMastodon/src/Manage.php:116
-msgid "No conversion"
-msgstr ""
-
-#: ../git-plugins/pingMastodon/src/Manage.php:111
-#: ../git-plugins/pingMastodon/src/Manage.php:117
 msgid "Spaces will be removed"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:112
+#: ../git-plugins/pingMastodon/src/Manage.php:111
 msgid "Spaces will be removed and tag will then be convert to <samp>camelCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:113
+#: ../git-plugins/pingMastodon/src/Manage.php:112
 msgid "Spaces will be removed and tag will then be convert to <samp>PascalCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:118
+#: ../git-plugins/pingMastodon/src/Manage.php:117
 msgid "Spaces will be removed and category name will then be convert to <samp>camelCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:119
+#: ../git-plugins/pingMastodon/src/Manage.php:118
 msgid "Spaces will be removed and category name will then be convert to <samp>PascalCase</samp>"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:142
+#: ../git-plugins/pingMastodon/src/Manage.php:141
 msgid "Public"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:143
+#: ../git-plugins/pingMastodon/src/Manage.php:142
 msgid "Unlisted"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:144
+#: ../git-plugins/pingMastodon/src/Manage.php:143
 msgid "Private"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:145
+#: ../git-plugins/pingMastodon/src/Manage.php:144
 msgid "Direct"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:156
+#: ../git-plugins/pingMastodon/src/Manage.php:155
 msgid "Activate pingMastodon plugin"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:165
+#: ../git-plugins/pingMastodon/src/Manage.php:164
 msgid "Mastodon instance:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:176
+#: ../git-plugins/pingMastodon/src/Manage.php:175
 msgid "Application token:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:185
+#: ../git-plugins/pingMastodon/src/Manage.php:184
 msgid "Status prefix:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:191
+#: ../git-plugins/pingMastodon/src/Manage.php:190
 msgid "Status visibility:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:194
+#: ../git-plugins/pingMastodon/src/Manage.php:195
+msgid "Automatically ping when an entry is first published"
+msgstr ""
+
+#: ../git-plugins/pingMastodon/src/Manage.php:198
 msgid "Catchphrase"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:199
+#: ../git-plugins/pingMastodon/src/Manage.php:203
 msgid "Use entry catchphrase if available"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:203
+#: ../git-plugins/pingMastodon/src/Manage.php:207
 msgid "The catchphrase is defined for each entry, see the options when creating/editing it."
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:211
+#: ../git-plugins/pingMastodon/src/Manage.php:215
 msgid "Include tags"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:214
+#: ../git-plugins/pingMastodon/src/Manage.php:218
 msgid "Tags conversion mode:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:224
+#: ../git-plugins/pingMastodon/src/Manage.php:228
 msgid "Include categories"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:228
+#: ../git-plugins/pingMastodon/src/Manage.php:232
 msgid "Will include category's parents"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:230
+#: ../git-plugins/pingMastodon/src/Manage.php:234
 msgid "Categories conversion mode:"
 msgstr ""
 
-#: ../git-plugins/pingMastodon/src/Manage.php:237
+#: ../git-plugins/pingMastodon/src/Manage.php:241
 msgid "Save"
 msgstr ""

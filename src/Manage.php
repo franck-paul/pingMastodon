@@ -68,6 +68,7 @@ class Manage
                 $settings->put('tags_mode', (int) $_POST['pm_tags_mode'], App::blogWorkspace()::NS_INT);
                 $settings->put('cats', !empty($_POST['pm_cats']));
                 $settings->put('cats_mode', (int) $_POST['pm_cats_mode'], App::blogWorkspace()::NS_INT);
+                $settings->put('auto_ping', !empty($_POST['pm_auto_ping']), App::blogWorkspace()::NS_BOOL);
 
                 App::blog()->triggerBlog();
 
@@ -143,6 +144,8 @@ class Manage
             __('Direct')   => 'direct',
         ];
 
+        $auto_ping = $settings->auto_ping ?? true;
+
         echo
         (new Form('ping_mastodon_params'))
             ->action(App::backend()->getPageURL())
@@ -187,6 +190,11 @@ class Manage
                         ->items($visibilities)
                         ->default(Html::escapeHTML((string) ($settings->visibility ?? 'public')))
                         ->label(new Label(__('Status visibility:'), Label::OUTSIDE_LABEL_BEFORE)),
+                ]),
+                (new Para())->items([
+                    (new Checkbox('pm_auto_ping', $auto_ping))
+                        ->value(1)
+                        ->label((new Label(__('Automatically ping when an entry is first published'), Label::INSIDE_TEXT_AFTER))),
                 ]),
                 (new Fieldset())
                 ->legend(new Legend(__('Catchphrase')))

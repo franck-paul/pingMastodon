@@ -33,8 +33,13 @@ class Prepend
             return false;
         }
 
-        // pingMastodon behavior
-        App::behavior()->addBehavior('coreFirstPublicationEntries', Helper::ping(...));
+        $settings  = My::settings();
+        $auto_ping = $settings->auto_ping ?? true;
+
+        if ($auto_ping) {
+            // pingMastodon behavior
+            App::behavior()->addBehavior('coreFirstPublicationEntries', Helper::ping(...));
+        }
 
         return true;
     }
