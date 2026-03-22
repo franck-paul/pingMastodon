@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-22 17:12+0100\n"
+"POT-Creation-Date: 2026-03-22 17:20+0100\n"
 "PO-Revision-Date: 2023-05-18 13:09+0000\n"
 "Last-Translator: Franck Paul <contact+transifex@open-time.net>, 2026\n"
 "Language-Team: French (https://app.transifex.com/open-time/teams/109573/fr/)\n"
@@ -121,20 +121,20 @@ msgstr ""
 "La phrase d'accroche est définie pour chaque entrée, voir les options lors "
 "de la création/modification."
 
-msgid "List tags as hastags"
-msgstr "Mentionner les tags comme mots-dièse"
+msgid "List tags as hashtags"
+msgstr "Mentionner les mots-clés comme des mots-dièse"
 
 msgid "Tags conversion mode:"
 msgstr "Mode de conversion des mots-clés :"
 
 msgid "List the names of the categories as hashtags"
-msgstr "Mentionner les noms de catégorie comme mots-dièse"
+msgstr "Mentionner les noms des catégories comme mots-dièse"
 
 msgid "It will also add the names of the parent categories"
 msgstr "Mentionnera également les noms des catégories parentes"
 
 msgid "Category names conversion mode:"
-msgstr "Mode de conversion des noms de catégories :"
+msgstr "Mode de conversion des noms des catégories :"
 
 msgid "Save"
 msgstr "Enregistrer"
