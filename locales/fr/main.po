@@ -134,7 +134,7 @@ msgid "It will also add the names of the parent categories"
 msgstr "Mentionnera également les noms des catégories parentes"
 
 msgid "Category names conversion mode:"
-msgstr "Mode de conversion des noms de catégorie :"
+msgstr "Mode de conversion des noms de catégories :"
 
 msgid "Save"
 msgstr "Enregistrer"
