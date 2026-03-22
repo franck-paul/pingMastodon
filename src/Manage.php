@@ -235,7 +235,7 @@ class Manage
                         (new Para())->items([
                             (new Checkbox('pm_tags', (bool) $settings->tags))
                                 ->value(1)
-                                ->label((new Label(__('List tags as hastags'), Label::INSIDE_TEXT_AFTER))),
+                                ->label((new Label(__('List tags as hashtags'), Label::INSIDE_TEXT_AFTER))),
                         ]),
                         (new Para())->class('pretty-title')->items([
                             (new Text(null, __('Tags conversion mode:'))),
