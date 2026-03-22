@@ -128,7 +128,7 @@ msgid "Tags conversion mode:"
 msgstr "Mode de conversion des mots-clés :"
 
 msgid "List the names of the categories as hashtags"
-msgstr "Mentionner les noms de catégorie comme mots-dièse"
+msgstr "Mentionner les noms des catégories comme mots-dièse"
 
 msgid "It will also add the names of the parent categories"
 msgstr "Mentionnera également les noms des catégories parentes"
