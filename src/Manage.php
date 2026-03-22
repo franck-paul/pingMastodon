@@ -69,6 +69,8 @@ class Manage
                 $settings->put('cats', !empty($_POST['pm_cats']));
                 $settings->put('cats_mode', (int) $_POST['pm_cats_mode'], App::blogWorkspace()::NS_INT);
                 $settings->put('auto_ping', !empty($_POST['pm_auto_ping']), App::blogWorkspace()::NS_BOOL);
+                $settings->put('only_cat', !empty($_POST['pm_only_cat']), App::blogWorkspace()::NS_BOOL);
+                $settings->put('only_cat_id', (int) $_POST['pm_only_cat_id'], App::blogWorkspace()::NS_INT);
 
                 App::blog()->triggerBlog();
 
@@ -146,6 +148,10 @@ class Manage
 
         $auto_ping = $settings->auto_ping ?? true;
 
+        $categories_combo = App::backend()->combos()->getCategoriesCombo(
+            App::blog()->getCategories()
+        );
+
         echo
         (new Form('ping_mastodon_params'))
             ->action(App::backend()->getPageURL())
@@ -191,52 +197,67 @@ class Manage
                         ->default(Html::escapeHTML((string) ($settings->visibility ?? 'public')))
                         ->label(new Label(__('Status visibility:'), Label::OUTSIDE_LABEL_BEFORE)),
                 ]),
-                (new Para())->items([
-                    (new Checkbox('pm_auto_ping', $auto_ping))
-                        ->value(1)
-                        ->label((new Label(__('Automatically ping when an entry is first published'), Label::INSIDE_TEXT_AFTER))),
-                ]),
                 (new Fieldset())
-                ->legend(new Legend(__('Catchphrase')))
-                ->fields([
-                    (new Para())->items([
-                        (new Checkbox('pm_catchphrase', (bool) $settings->catchphrase))
+                    ->legend(new Legend(__('Automatic ping')))
+                    ->fields([
+                        (new Checkbox('pm_auto_ping', $auto_ping))
                             ->value(1)
-                            ->label((new Label(__('Use entry catchphrase if available'), Label::INSIDE_TEXT_AFTER))),
+                            ->label((new Label(__('Automatically ping when an entry is first published'), Label::INSIDE_TEXT_AFTER))),
+                        (new Para())->items([
+                            (new Checkbox('pm_only_cat', (bool) $settings->only_cat))
+                                ->value(1)
+                                ->label((new Label(__('Restrict automatic ping to one category only'), Label::INSIDE_TEXT_AFTER))),
+                        ]),
+                        (new Para())
+                            ->items([
+                                (new Select('pm_only_cat_id'))
+                                    ->items($categories_combo)
+                                    ->default((int) $settings->only_cat_id)
+                                    ->label(new Label(__('Category:'), Label::IL_TF)),
+                            ]),
+
                     ]),
-                    (new Note())
-                        ->class('form-note')
-                        ->text(__('The catchphrase is defined for each entry, see the options when creating/editing it.')),
-                ]),
                 (new Fieldset())
-                ->legend(new Legend(__('Tags')))
-                ->fields([
-                    (new Para())->items([
-                        (new Checkbox('pm_tags', (bool) $settings->tags))
-                            ->value(1)
-                            ->label((new Label(__('Include tags'), Label::INSIDE_TEXT_AFTER))),
+                    ->legend(new Legend(__('Catchphrase')))
+                    ->fields([
+                        (new Para())->items([
+                            (new Checkbox('pm_catchphrase', (bool) $settings->catchphrase))
+                                ->value(1)
+                                ->label((new Label(__('Use entry catchphrase if available'), Label::INSIDE_TEXT_AFTER))),
+                        ]),
+                        (new Note())
+                            ->class('form-note')
+                            ->text(__('The catchphrase is defined for each entry, see the options when creating/editing it.')),
                     ]),
-                    (new Para())->class('pretty-title')->items([
-                        (new Text(null, __('Tags conversion mode:'))),
-                    ]),
-                    ...$tagsmodes,
-                ]),
                 (new Fieldset())
-                ->legend(new Legend(__('Categories')))
-                ->fields([
-                    (new Para())->items([
-                        (new Checkbox('pm_cats', (bool) $settings->cats))
-                            ->value(1)
-                            ->label((new Label(__('Include categories'), Label::INSIDE_TEXT_AFTER))),
+                    ->legend(new Legend(__('Tags')))
+                    ->fields([
+                        (new Para())->items([
+                            (new Checkbox('pm_tags', (bool) $settings->tags))
+                                ->value(1)
+                                ->label((new Label(__('List tags as hastags'), Label::INSIDE_TEXT_AFTER))),
+                        ]),
+                        (new Para())->class('pretty-title')->items([
+                            (new Text(null, __('Tags conversion mode:'))),
+                        ]),
+                        ...$tagsmodes,
                     ]),
-                    (new Note())
-                        ->class('form-note')
-                        ->text(__('Will include category\'s parents')),
-                    (new Para())->class('pretty-title')->items([
-                        (new Text(null, __('Categories conversion mode:'))),
+                (new Fieldset())
+                    ->legend(new Legend(__('Categories')))
+                    ->fields([
+                        (new Para())->items([
+                            (new Checkbox('pm_cats', (bool) $settings->cats))
+                                ->value(1)
+                                ->label((new Label(__('List the names of the categories as hashtags'), Label::INSIDE_TEXT_AFTER))),
+                        ]),
+                        (new Note())
+                            ->class('form-note')
+                            ->text(__('It will also add the names of the parent categories')),
+                        (new Para())->class('pretty-title')->items([
+                            (new Text(null, __('Category names conversion mode:'))),
+                        ]),
+                        ...$catsmodes,
                     ]),
-                    ...$catsmodes,
-                ]),
                 // Submit
                 (new Para())->items([
                     (new Submit(['frmsubmit']))

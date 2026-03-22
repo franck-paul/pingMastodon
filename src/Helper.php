@@ -31,21 +31,23 @@ class Helper
      * @param      BlogInterface        $blog   The blog
      * @param      array<int>           $ids    The identifiers
      */
-    public static function ping(BlogInterface $blog, array $ids): string
+    public static function ping(BlogInterface $blog, array $ids, bool $ignore_category = false): string
     {
         $settings = My::settings();
         if (!$settings->active) {
             return '';
         }
 
-        $instance   = $settings->instance;
-        $token      = $settings->token;
-        $prefix     = $settings->prefix;
-        $visibility = $settings->visibility;
-        $addtags    = $settings->tags;
-        $tagsmode   = $settings->tags_mode;
-        $addcats    = $settings->cats;
-        $catsmode   = $settings->cats_mode;
+        $instance    = $settings->instance;
+        $token       = $settings->token;
+        $prefix      = $settings->prefix;
+        $visibility  = $settings->visibility;
+        $addtags     = $settings->tags;
+        $tagsmode    = $settings->tags_mode;
+        $addcats     = $settings->cats;
+        $catsmode    = $settings->cats_mode;
+        $only_cat    = is_bool($only_cat = $settings->only_cat) && $only_cat;
+        $only_cat_id = is_numeric($only_cat_id = $settings->only_cat_id) ? (int) $only_cat_id : 0;
 
         if (empty($instance) || empty($token) || $ids === []) {
             return '';
@@ -63,6 +65,13 @@ class Helper
             $rs = $blog->getPosts(['post_id' => $ids]);
             $rs->extend(Post::class);
             while ($rs->fetch()) {
+                $cat_id = is_numeric($cat_id = $rs->cat_id) ? (int) $cat_id : 0;
+                if ($ignore_category === false && $only_cat && $cat_id !== $only_cat_id) {
+                    // We do not ignore category and
+                    // the article's category isn't the only one that needs to be taken into account
+                    continue;
+                }
+
                 $elements    = [];
                 $catchphrase = $settings->catchphrase ? self::getCatchPhrase((int) $rs->post_id) : '';
                 if ($catchphrase !== '') {
@@ -73,8 +82,8 @@ class Helper
                 // References (categories, tags)
                 $references = [];
                 // Categories
-                if ($addcats && $rs->cat_id) {
-                    $rscats = App::blog()->getCategoryParents((int) $rs->cat_id);
+                if ($addcats && $cat_id !== 0) {
+                    $rscats = App::blog()->getCategoryParents($cat_id);
                     while ($rscats->fetch()) {
                         $references[] = '#' . self::convertRef($rscats->cat_title, $catsmode);
                     }
@@ -99,8 +108,6 @@ class Helper
                     'status'     => implode("\n", $elements),
                     'visibility' => $visibility ?? 'public',
                 ];
-
-                // Check if an image is avalaible, and if so send it and get its media_id
 
                 HttpClient::quickPost($uri, $payload);
             }
