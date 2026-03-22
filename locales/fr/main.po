@@ -3,16 +3,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Franck Paul <carnet.franck.paul@gmail.com>, 2025
+# Franck Paul <contact+transifex@open-time.net>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 pingMastodon module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-22 10:33+0100\n"
+"POT-Creation-Date: 2026-03-22 17:12+0100\n"
 "PO-Revision-Date: 2023-05-18 13:09+0000\n"
-"Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>, 2025\n"
+"Last-Translator: Franck Paul <contact+transifex@open-time.net>, 2026\n"
 "Language-Team: French (https://app.transifex.com/open-time/teams/109573/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,8 +96,17 @@ msgstr "Préfixe de statut :"
 msgid "Status visibility:"
 msgstr "Visibilité du statut :"
 
+msgid "Automatic ping"
+msgstr "Ping automatique"
+
 msgid "Automatically ping when an entry is first published"
 msgstr "Ping automatique à la première publication d'une entrée"
+
+msgid "Restrict automatic ping to one category only"
+msgstr "Restreindre le ping automatique à une seule catégorie"
+
+msgid "Category:"
+msgstr "Catégorie :"
 
 msgid "Catchphrase"
 msgstr "Phrase d'accroche"
@@ -112,20 +121,20 @@ msgstr ""
 "La phrase d'accroche est définie pour chaque entrée, voir les options lors "
 "de la création/modification."
 
-msgid "Include tags"
-msgstr "Inclure les mots-clés"
+msgid "List tags as hastags"
+msgstr "Mentionner les tags comme mots-dièse"
 
 msgid "Tags conversion mode:"
 msgstr "Mode de conversion des mots-clés :"
 
-msgid "Include categories"
-msgstr "Inclure les catégories"
+msgid "List the names of the categories as hashtags"
+msgstr "Mentionner les noms de catégorie comme mots-dièse"
 
-msgid "Will include category's parents"
-msgstr "Inclura les catégories parentes de la catégorie"
+msgid "It will also add the names of the parent categories"
+msgstr "Mentionnera également les noms des catégories parentes"
 
-msgid "Categories conversion mode:"
-msgstr "Mode de conversion des catégories :"
+msgid "Category names conversion mode:"
+msgstr "Mode de conversion des noms de catégorie :"
 
 msgid "Save"
 msgstr "Enregistrer"
