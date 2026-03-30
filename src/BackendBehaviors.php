@@ -33,9 +33,9 @@ class BackendBehaviors
     /**
      * Add ping Mastodon fieldset in entry sidebar.
      *
-     * @param   ArrayObject<string, mixed>     $main       The main part of the entry form
-     * @param   ArrayObject<string, mixed>     $sidebar    The sidebar part of the entry form
-     * @param   MetaRecord                     $post       The post
+     * @param      ArrayObject<string, string>                                              $main     The main
+     * @param      ArrayObject<string, array{title: string, items: array<string, string>}>  $sidebar  The sidebar
+     * @param      MetaRecord|null                                                          $post     The post
      */
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): string
     {
@@ -45,9 +45,10 @@ class BackendBehaviors
         }
 
         if (!empty($_POST['ping-mastodon-catchphrase'])) {
-            $catchphrase = $_POST['ping-mastodon-catchphrase'];
+            $catchphrase = is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
         } else {
-            $catchphrase = $post instanceof MetaRecord ? Helper::getCatchPhrase((int) $post->post_id) : '';
+            $post_id     = $post instanceof MetaRecord && is_numeric($post_id = $post->post_id) ? (int) $post_id : 0;
+            $catchphrase = $post_id !== 0 ? Helper::getCatchPhrase($post_id) : '';
         }
 
         $div = (new Div())
@@ -80,8 +81,13 @@ class BackendBehaviors
             return;
         }
 
-        $catchphrase = $_POST['ping-mastodon-catchphrase'] ?? '';
-        Helper::setCatchPhrase((int) $post_id, Html::escapeHTML($catchphrase));
+        $post_id = is_numeric($post_id) ? (int) $post_id : 0;
+        if ($post_id === 0) {
+            return;
+        }
+
+        $catchphrase = is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
+        Helper::setCatchPhrase($post_id, Html::escapeHTML($catchphrase));
     }
 
     public static function adminPostsActions(ActionsPosts $ap): string
@@ -123,9 +129,11 @@ class BackendBehaviors
         if ($rs->rows()) {
             $ids = [];
             while ($rs->fetch()) {
-                if ((int) $rs->post_status === App::status()->post()::PUBLISHED) {
+                $post_status = is_numeric($post_status = $rs->post_status) ? $post_status : App::status()->post()::UNPUBLISHED;
+                $post_id     = is_numeric($post_id = $rs->post_id) ? (int) $post_id : 0;
+                if ($post_id !== 0 && $post_status === App::status()->post()::PUBLISHED) {
                     // Ping only published entry
-                    $ids[] = $rs->post_id;
+                    $ids[] = $post_id;
                 }
             }
 

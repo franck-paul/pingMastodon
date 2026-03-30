@@ -54,23 +54,27 @@ class Manage
         }
 
         if ($_POST !== []) {
+            $_Bool = fn (string $name): bool => !empty($_POST[$name]);
+            $_Int  = fn (string $name, int $default = 0): int => isset($_POST[$name]) && is_numeric($val = $_POST[$name]) ? (int) $val : $default;
+            $_Str  = fn (string $name, string $default = ''): string => isset($_POST[$name]) && is_string($val = $_POST[$name]) ? trim($val) : $default;
+
             try {
                 $settings = My::settings();
 
-                $settings->put('active', !empty($_POST['pm_active']));
+                $settings->put('active', $_Bool('pm_active'), App::blogWorkspace()::NS_BOOL);
 
-                $settings->put('instance', trim(Html::escapeHTML($_POST['pm_instance'])));
-                $settings->put('token', trim(Html::escapeHTML($_POST['pm_token'])));
-                $settings->put('prefix', trim(Html::escapeHTML($_POST['pm_prefix'])));
-                $settings->put('visibility', trim(Html::escapeHTML($_POST['pm_visibility'])));
-                $settings->put('catchphrase', !empty($_POST['pm_catchphrase']));
-                $settings->put('tags', !empty($_POST['pm_tags']));
-                $settings->put('tags_mode', (int) $_POST['pm_tags_mode'], App::blogWorkspace()::NS_INT);
-                $settings->put('cats', !empty($_POST['pm_cats']));
-                $settings->put('cats_mode', (int) $_POST['pm_cats_mode'], App::blogWorkspace()::NS_INT);
-                $settings->put('auto_ping', !empty($_POST['pm_auto_ping']), App::blogWorkspace()::NS_BOOL);
-                $settings->put('only_cat', !empty($_POST['pm_only_cat']), App::blogWorkspace()::NS_BOOL);
-                $settings->put('only_cat_id', (int) $_POST['pm_only_cat_id'], App::blogWorkspace()::NS_INT);
+                $settings->put('instance', $_Str('pm_instance'), App::blogWorkspace()::NS_STRING);
+                $settings->put('token', $_Str('pm_token'), App::blogWorkspace()::NS_STRING);
+                $settings->put('prefix', $_Str('pm_prefix'), App::blogWorkspace()::NS_STRING);
+                $settings->put('visibility', $_Str('pm_visibility'), App::blogWorkspace()::NS_STRING);
+                $settings->put('catchphrase', $_Bool('pm_catchphrase'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('tags', $_Bool('pm_tags'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('tags_mode', $_Int('pm_tags_mode'), App::blogWorkspace()::NS_INT);
+                $settings->put('cats', $_Bool('pm_cats'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('cats_mode', $_Int('pm_cats_mode'), App::blogWorkspace()::NS_INT);
+                $settings->put('auto_ping', $_Bool('pm_auto_ping'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('only_cat', $_Bool('pm_only_cat'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('only_cat_id', $_Int('pm_only_cat_id'), App::blogWorkspace()::NS_INT);
 
                 App::blog()->triggerBlog();
 
@@ -106,6 +110,13 @@ class Manage
         echo App::backend()->notices()->getNotices();
 
         // Form
+
+        $instance    = is_string($instance = $settings->instance) ? $instance : '';
+        $token       = is_string($token = $settings->token) ? $token : '';
+        $prefix      = is_string($prefix = $settings->prefix) ? $prefix : '';
+        $visibility  = is_string($visibility = $settings->visibility) ? $visibility : 'public';
+        $auto_ping   = is_bool($auto_ping = $settings->auto_ping) ? $auto_ping : true;
+        $only_cat_id = is_numeric($only_cat_id = $settings->only_cat_id) ? (int) $only_cat_id : 0;
 
         $references_mode_options_tags = [
             My::REFS_MODE_NONE       => __('No conversion'),
@@ -146,8 +157,6 @@ class Manage
             __('Direct')   => 'direct',
         ];
 
-        $auto_ping = $settings->auto_ping ?? true;
-
         $categories_combo = App::backend()->combos()->getCategoriesCombo(
             App::blog()->getCategories()
         );
@@ -166,7 +175,7 @@ class Manage
                     (new Input('pm_instance'))
                         ->size(48)
                         ->maxlength(128)
-                        ->value(Html::escapeHTML((string) $settings->instance))
+                        ->value(Html::escapeHTML($instance))
                         ->required(true)
                         ->label((new Label(
                             (new Text('abbr', '*'))->title(__('Required field'))->render() . __('Mastodon instance:'),
@@ -177,7 +186,7 @@ class Manage
                     (new Input('pm_token'))
                         ->size(64)
                         ->maxlength(128)
-                        ->value(Html::escapeHTML((string) $settings->token))
+                        ->value(Html::escapeHTML($token))
                         ->required(true)
                         ->label((new Label(
                             (new Text('abbr', '*'))->title(__('Required field'))->render() . __('Application token:'),
@@ -188,13 +197,13 @@ class Manage
                     (new Input('pm_prefix'))
                         ->size(30)
                         ->maxlength(128)
-                        ->value(Html::escapeHTML((string) $settings->prefix))
+                        ->value(Html::escapeHTML($prefix))
                         ->label((new Label(__('Status prefix:'), Label::OUTSIDE_TEXT_BEFORE))),
                 ]),
                 (new Para())->items([
                     (new Select('pm_visibility'))
                         ->items($visibilities)
-                        ->default(Html::escapeHTML((string) ($settings->visibility ?? 'public')))
+                        ->default(Html::escapeHTML($visibility))
                         ->label(new Label(__('Status visibility:'), Label::OUTSIDE_LABEL_BEFORE)),
                 ]),
                 (new Fieldset())
@@ -212,7 +221,7 @@ class Manage
                             ->items([
                                 (new Select('pm_only_cat_id'))
                                     ->items($categories_combo)
-                                    ->default((int) $settings->only_cat_id)
+                                    ->default($only_cat_id)
                                     ->label(new Label(__('Category:'), Label::IL_TF)),
                             ]),
 
