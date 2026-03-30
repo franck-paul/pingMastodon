@@ -15,9 +15,9 @@ $this->registerModule(
     'Ping Mastodon',
     'Ping Mastodon',
     'Franck Paul',
-    '6.6',
+    '6.7',
     [
-        'date'        => '2026-03-22T17:23:53+0100',
+        'date'        => '2026-03-30T10:09:43+0200',
         'requires'    => [['core', '2.36']],
         'type'        => 'plugin',
         'permissions' => 'My',
