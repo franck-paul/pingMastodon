@@ -86,7 +86,8 @@ class BackendBehaviors
             return;
         }
 
-        $catchphrase = is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
+        $catchphrase = isset($_POST['ping-mastodon-catchphrase']) && is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
+
         Helper::setCatchPhrase($post_id, Html::escapeHTML($catchphrase));
     }
 
