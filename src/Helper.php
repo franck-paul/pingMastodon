@@ -85,6 +85,7 @@ class Helper
                 if ($catchphrase !== '') {
                     $catchphrase .= "\n";
                 }
+
                 // [Prefix] [Catchphrase] Title
                 $elements[] = ($prefix === '' ? '' : $prefix . ' ') . $catchphrase . $post_title;
                 // References (categories, tags)
@@ -98,11 +99,13 @@ class Helper
                             $references[] = '#' . self::convertRef($cat_title, $catsmode);
                         }
                     }
+
                     $cat_title = is_string($cat_title = $rs->cat_title) ? $cat_title : '';
                     if ($cat_title !== '') {
                         $references[] = '#' . self::convertRef($cat_title, $catsmode);
                     }
                 }
+
                 // Tags
                 if ($addtags) {
                     $post_meta = is_string($post_meta = $rs->post_meta) ? $post_meta : '';
@@ -117,15 +120,18 @@ class Helper
                         }
                     }
                 }
+
                 $references = array_unique($references);
                 if ($references !== []) {
                     $elements[] = implode(' ', $references);
                 }
+
                 // URL
                 $post_url = is_string($post_url = $rs->getURL()) ? $post_url : '';
                 if ($post_url === '') {
                     continue;
                 }
+
                 $elements[] = $post_url;
 
                 $payload = [
