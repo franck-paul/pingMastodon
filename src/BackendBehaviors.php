@@ -127,7 +127,7 @@ class BackendBehaviors
     public static function adminPingMastodon(ActionsPosts|PagesBackendActions $ap): void
     {
         $rs = $ap->getRS();
-        if ($rs->rows()) {
+        if ($rs->rows() !== []) {
             $ids = [];
             while ($rs->fetch()) {
                 $post_status = is_numeric($post_status = $rs->post_status) ? $post_status : App::status()->post()::UNPUBLISHED;
