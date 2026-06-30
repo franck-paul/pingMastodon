@@ -47,7 +47,7 @@ class BackendBehaviors
         if (!empty($_POST['ping-mastodon-catchphrase'])) {
             $catchphrase = is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
         } else {
-            $post_id     = $post instanceof MetaRecord && is_numeric($post_id = $post->post_id) ? (int) $post_id : 0;
+            $post_id     = $post instanceof MetaRecord ? $post->intField('post_id') : 0;
             $catchphrase = $post_id !== 0 ? Helper::getCatchPhrase($post_id) : '';
         }
 

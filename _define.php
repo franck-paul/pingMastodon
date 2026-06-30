@@ -18,7 +18,7 @@ $this->registerModule(
     '6.8',
     [
         'date'        => '2026-06-27T12:01:37+0200',
-        'requires'    => [['core', '2.36']],
+        'requires'    => [['core', '2.39']],
         'type'        => 'plugin',
         'permissions' => 'My',
         'details'     => 'https://open-time.net/docs/plugins/pingMastodon',
