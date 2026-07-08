@@ -34,7 +34,7 @@ class Prepend
         }
 
         $settings  = My::settings();
-        $auto_ping = $settings->auto_ping ?? true;
+        $auto_ping = $settings->getBool('auto_ping') ?? true;
 
         if ($auto_ping) {
             // pingMastodon behavior

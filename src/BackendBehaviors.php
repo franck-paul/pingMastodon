@@ -40,7 +40,7 @@ class BackendBehaviors
     public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): string
     {
         $settings = My::settings();
-        if (!$settings->active) {
+        if (!$settings->getBool('active')) {
             return '';
         }
 
@@ -77,7 +77,7 @@ class BackendBehaviors
      */
     public static function setCatchPhrase(Cursor $cur, $post_id): void
     {
-        if (!My::settings()->active) {
+        if (!My::settings()->getBool('active')) {
             return;
         }
 

@@ -34,31 +34,31 @@ class Helper
     public static function ping(BlogInterface $blog, array $ids, bool $ignore_category = false): string
     {
         $settings = My::settings();
-        if (!$settings->active) {
+        if (!$settings->getBool('active')) {
             return '';
         }
 
-        $instance    = is_string($instance = $settings->instance) ? $instance : '';
-        $token       = is_string($token = $settings->token) ? $token : '';
-        $prefix      = is_string($prefix = $settings->prefix) ? $prefix : '';
-        $visibility  = is_string($visibility = $settings->visibility) ? $visibility : 'public';
-        $addtags     = is_bool($addtags = $settings->tags) && $addtags;
-        $tagsmode    = is_numeric($tagsmode = $settings->tags_mode) ? (int) $tagsmode : My::REFS_MODE_CAMELCASE;
-        $addcats     = is_bool($addcats = $settings->cats) && $addcats;
-        $catsmode    = is_numeric($catsmode = $settings->cats_mode) ? (int) $catsmode : My::REFS_MODE_CAMELCASE;
-        $only_cat    = is_bool($only_cat = $settings->only_cat) && $only_cat;
-        $only_cat_id = is_numeric($only_cat_id = $settings->only_cat_id) ? (int) $only_cat_id : 0;
+        $instance    = $settings->getStr('instance', false);
+        $token       = $settings->getStr('token', false);
+        $prefix      = $settings->getStr('prefix', false);
+        $visibility  = $settings->getStr('visibility', false) ?: 'public';
+        $addtags     = $settings->getBool('tags', false);
+        $tagsmode    = $settings->getInt('tags_mode') ?? My::REFS_MODE_CAMELCASE;
+        $addcats     = $settings->getBool('cats', false);
+        $catsmode    = $settings->getInt('cats_mode') ?? My::REFS_MODE_CAMELCASE;
+        $only_cat    = $settings->getBool('only_cat', false);
+        $only_cat_id = $settings->getInt('only_cat_id', false);
 
         if ($instance === '' || $token === '' || $ids === []) {
             return '';
         }
 
         // Prepare instance URI
-        if (!parse_url($instance, PHP_URL_HOST)) {
+        if (!parse_url((string) $instance, PHP_URL_HOST)) {
             $instance = 'https://' . $instance;
         }
 
-        $uri = rtrim($instance, '/') . '/api/v1/statuses?access_token=' . $token;
+        $uri = rtrim((string) $instance, '/') . '/api/v1/statuses?access_token=' . $token;
 
         try {
             // Get posts information
@@ -81,7 +81,7 @@ class Helper
                 $post_title = $rs->strField('post_title');
 
                 $elements    = [];
-                $catchphrase = $settings->catchphrase ? self::getCatchPhrase($post_id) : '';
+                $catchphrase = $settings->getBool('catchphrase') ? self::getCatchPhrase($post_id) : '';
                 if ($catchphrase !== '') {
                     $catchphrase .= "\n";
                 }

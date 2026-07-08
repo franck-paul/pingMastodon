@@ -111,12 +111,12 @@ class Manage
 
         // Form
 
-        $instance    = is_string($instance = $settings->instance) ? $instance : '';
-        $token       = is_string($token = $settings->token) ? $token : '';
-        $prefix      = is_string($prefix = $settings->prefix) ? $prefix : '';
-        $visibility  = is_string($visibility = $settings->visibility) ? $visibility : 'public';
-        $auto_ping   = is_bool($auto_ping = $settings->auto_ping) ? $auto_ping : true;
-        $only_cat_id = is_numeric($only_cat_id = $settings->only_cat_id) ? (int) $only_cat_id : 0;
+        $instance    = $settings->getStr('instance', false);
+        $token       = $settings->getStr('token', false);
+        $prefix      = $settings->getStr('prefix', false);
+        $visibility  = $settings->getStr('visibility', false) ?: 'public';
+        $auto_ping   = $settings->getBool('auto_ping') ?? true;
+        $only_cat_id = $settings->getInt('only_cat_id', false);
 
         $references_mode_options_tags = [
             My::REFS_MODE_NONE       => __('No conversion'),
@@ -132,8 +132,8 @@ class Manage
         ];
         $tagsmodes = [];
         $catsmodes = [];
-        $tags_mode = $settings->tags_mode ?? My::REFS_MODE_CAMELCASE;
-        $cats_mode = $settings->cats_mode ?? My::REFS_MODE_CAMELCASE;
+        $tags_mode = $settings->getInt('tags_mode') ?? My::REFS_MODE_CAMELCASE;
+        $cats_mode = $settings->getInt('cats_mode') ?? My::REFS_MODE_CAMELCASE;
 
         $i = 0;
         foreach ($references_mode_options_tags as $k => $v) {
@@ -168,7 +168,7 @@ class Manage
             ->method('post')
             ->fields([
                 (new Para())->items([
-                    (new Checkbox('pm_active', (bool) $settings->active))
+                    (new Checkbox('pm_active', $settings->getBool('active', false)))
                         ->value(1)
                         ->label((new Label(__('Activate pingMastodon plugin'), Label::INSIDE_TEXT_AFTER))),
                 ]),
@@ -214,7 +214,7 @@ class Manage
                             ->value(1)
                             ->label((new Label(__('Automatically ping when an entry is first published'), Label::INSIDE_TEXT_AFTER))),
                         (new Para())->items([
-                            (new Checkbox('pm_only_cat', (bool) $settings->only_cat))
+                            (new Checkbox('pm_only_cat', $settings->getBool('only_cat', false)))
                                 ->value(1)
                                 ->label((new Label(__('Restrict automatic ping to one category only'), Label::INSIDE_TEXT_AFTER))),
                         ]),
@@ -231,7 +231,7 @@ class Manage
                     ->legend(new Legend(__('Catchphrase')))
                     ->fields([
                         (new Para())->items([
-                            (new Checkbox('pm_catchphrase', (bool) $settings->catchphrase))
+                            (new Checkbox('pm_catchphrase', $settings->getBool('catchphrase', false)))
                                 ->value(1)
                                 ->label((new Label(__('Use entry catchphrase if available'), Label::INSIDE_TEXT_AFTER))),
                         ]),
@@ -243,7 +243,7 @@ class Manage
                     ->legend(new Legend(__('Tags')))
                     ->fields([
                         (new Para())->items([
-                            (new Checkbox('pm_tags', (bool) $settings->tags))
+                            (new Checkbox('pm_tags', $settings->getBool('tags', false)))
                                 ->value(1)
                                 ->label((new Label(__('List tags as hashtags'), Label::INSIDE_TEXT_AFTER))),
                         ]),
@@ -256,7 +256,7 @@ class Manage
                     ->legend(new Legend(__('Categories')))
                     ->fields([
                         (new Para())->items([
-                            (new Checkbox('pm_cats', (bool) $settings->cats))
+                            (new Checkbox('pm_cats', $settings->getBool('cats', false)))
                                 ->value(1)
                                 ->label((new Label(__('List the names of the categories as hashtags'), Label::INSIDE_TEXT_AFTER))),
                         ]),
