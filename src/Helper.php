@@ -127,7 +127,7 @@ class Helper
                 }
 
                 // URL
-                $post_url = is_string($post_url = $rs->getURL()) ? $post_url : '';
+                $post_url = $rs->getURL();
                 if ($post_url === '') {
                     continue;
                 }
