@@ -49,7 +49,10 @@ class Helper
         $only_cat    = $settings->getBool('only_cat', false);
         $only_cat_id = $settings->getInt('only_cat_id', false);
 
-        if ($instance === '' || $token === '' || $ids === []) {
+        if ($instance === ''
+            || $token === ''
+            || $ids   === []
+        ) {
             return '';
         }
 
@@ -72,7 +75,10 @@ class Helper
                 }
 
                 $cat_id = $rs->intField('cat_id');
-                if ($ignore_category === false && $only_cat && $cat_id !== $only_cat_id) {
+                if ($ignore_category === false
+                    && $only_cat
+                    && $cat_id !== $only_cat_id
+                ) {
                     // We do not ignore category and
                     // the article's category isn't the only one that needs to be taken into account
                     continue;
