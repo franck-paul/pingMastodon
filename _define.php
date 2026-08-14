@@ -18,9 +18,9 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'Ping Mastodon',
         'Ping Mastodon',
         'Franck Paul',
-        '7.0.1',
+        '7.1',
         [
-            'date'        => '2026-08-05T10:14:12+0200',
+            'date'        => '2026-08-14T11:29:31+0200',
             'requires'    => [['core', '2.39']],
             'type'        => 'plugin',
             'permissions' => 'My',
