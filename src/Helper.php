@@ -73,6 +73,11 @@ class Helper
             $rs = $blog->getPosts(['post_id' => $ids]);
             $rs->extend(Post::class);
             while ($rs->fetch()) {
+                // Exclude password protected entries
+                if ($rs->strField('post_password') !== '') {
+                    continue;
+                }
+
                 $post_id = $rs->intField('post_id');
                 if ($post_id === 0) {
                     // We should not have a post_id = 0, but who knows?
