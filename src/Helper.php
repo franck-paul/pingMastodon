@@ -24,6 +24,9 @@ use Exception;
 
 class Helper
 {
+    /**
+     * @var string CATCHPHRASE_METATYPE
+     */
     protected const CATCHPHRASE_METATYPE = 'ping_mastodon_catchphrase';
 
     /**
