@@ -35,9 +35,9 @@ class BackendBehaviors
      *
      * @param      ArrayObject<string, string>                                              $main     The main
      * @param      ArrayObject<string, array{title: string, items: array<string, string>}>  $sidebar  The sidebar
-     * @param      MetaRecord|null                                                          $post     The post
+     * @param      MetaRecord|null                                                          $metaRecord     The post
      */
-    public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $post): string
+    public static function adminPostFormItems(ArrayObject $main, ArrayObject $sidebar, ?MetaRecord $metaRecord): string
     {
         $settings = My::settings();
         if (!$settings->getBool('active')) {
@@ -47,7 +47,7 @@ class BackendBehaviors
         if (!empty($_POST['ping-mastodon-catchphrase'])) {
             $catchphrase = is_string($catchphrase = $_POST['ping-mastodon-catchphrase']) ? $catchphrase : '';
         } else {
-            $post_id     = $post instanceof MetaRecord ? $post->intField('post_id') : 0;
+            $post_id     = $metaRecord instanceof MetaRecord ? $metaRecord->intField('post_id') : 0;
             $catchphrase = $post_id !== 0 ? Helper::getCatchPhrase($post_id) : '';
         }
 
@@ -72,10 +72,10 @@ class BackendBehaviors
     }
 
     /**
-     * @param   Cursor  $cur        The current
+     * @param   Cursor  $cursor        The current
      * @param   mixed   $post_id    The post identifier
      */
-    public static function setCatchPhrase(Cursor $cur, $post_id): void
+    public static function setCatchPhrase(Cursor $cursor, $post_id): void
     {
         if (!My::settings()->getBool('active')) {
             return;
@@ -91,13 +91,13 @@ class BackendBehaviors
         Helper::setCatchPhrase($post_id, Html::escapeHTML($catchphrase));
     }
 
-    public static function adminPostsActions(ActionsPosts $ap): string
+    public static function adminPostsActions(ActionsPosts $actionsPosts): string
     {
         // Add menuitem in actions dropdown list
         if (App::auth()->check(App::auth()->makePermissions([
             App::auth()::PERMISSION_CONTENT_ADMIN,
         ]), App::blog()->id())) {
-            $ap->addAction(
+            $actionsPosts->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
                 self::adminPingMastodon(...)
             );
@@ -106,13 +106,13 @@ class BackendBehaviors
         return '';
     }
 
-    public static function adminPagesActions(PagesBackendActions $ap): string
+    public static function adminPagesActions(PagesBackendActions $pagesBackendActions): string
     {
         // Add menuitem in actions dropdown list
         if (App::auth()->check(App::auth()->makePermissions([
             App::auth()::PERMISSION_CONTENT_ADMIN,
         ]), App::blog()->id())) {
-            $ap->addAction(
+            $pagesBackendActions->addAction(
                 [__('Mastodon') => [__('Ping Mastodon') => 'pingMastodon']],
                 self::adminPingMastodon(...)
             );
@@ -122,11 +122,11 @@ class BackendBehaviors
     }
 
     /**
-     * @param      ActionsPosts|PagesBackendActions     $ap     Actions
+     * @param      ActionsPosts|PagesBackendActions     $actionsPostsPages     Actions
      */
-    public static function adminPingMastodon(ActionsPosts|PagesBackendActions $ap): void
+    public static function adminPingMastodon(ActionsPosts|PagesBackendActions $actionsPostsPages): void
     {
-        $rs = $ap->getRS();
+        $rs = $actionsPostsPages->getRS();
         if ($rs->rows() !== []) {
             $ids = [];
             while ($rs->fetch()) {
@@ -143,9 +143,9 @@ class BackendBehaviors
                 App::backend()->notices()->addSuccessNotice(__('All entries have been ping to Mastodon.'));
             }
 
-            $ap->redirect(true);
+            $actionsPostsPages->redirect(true);
         } else {
-            $ap->redirect();
+            $actionsPostsPages->redirect();
         }
     }
 }
