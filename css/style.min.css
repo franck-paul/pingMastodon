@@ -1,1 +1,1 @@
-p.ping-mastodon textarea{width:100%;padding:.5em 1.5em .5em .5em}
+p.ping-mastodon textarea{inline-size:100%;padding-block:.5em;padding-inline:.5em 1.5em}
