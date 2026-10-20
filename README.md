@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/franck-paul/pingMastodon)](https://github.com/franck-paul/pingMastodon/releases)
 [![Date](https://img.shields.io/github/release-date/franck-paul/pingMastodon)](https://github.com/franck-paul/pingMastodon/releases)
 [![Issues](https://img.shields.io/github/issues/franck-paul/pingMastodon)](https://github.com/franck-paul/pingMastodon/issues)
-[![License](https://img.shields.io/github/license/franck-paul/pingMastodon)](https://github.com/franck-paul/pingMastodon/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/franck-paul/pingMastodon)](https://github.com/franck-paul/pingMastodon/blob/main/LICENSE)
 
 ## Settings
 
