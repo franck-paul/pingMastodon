@@ -65,11 +65,11 @@ class Helper
         }
 
         // Prepare instance URI
-        if (!parse_url((string) $instance, PHP_URL_HOST)) {
+        if (!parse_url($instance, PHP_URL_HOST)) {
             $instance = 'https://' . $instance;
         }
 
-        $uri = rtrim((string) $instance, '/') . '/api/v1/statuses?access_token=' . $token;
+        $uri = rtrim($instance, '/') . '/api/v1/statuses?access_token=' . $token;
 
         try {
             // Get posts information
@@ -195,14 +195,14 @@ class Helper
             My::REFS_MODE_PASCALCASE => str_replace(
                 ' ',
                 '',
-                ucwords(mb_convert_case(strtolower((string) $reference), MB_CASE_TITLE, 'UTF-8'))
+                ucwords(mb_convert_case(strtolower($reference), MB_CASE_TITLE, 'UTF-8'))
             ),
             // Uppercase each words but the first and remove spaces
             My::REFS_MODE_CAMELCASE => lcfirst(
                 str_replace(
                     ' ',
                     '',
-                    ucwords(mb_convert_case(strtolower((string) $reference), MB_CASE_TITLE, 'UTF-8'))
+                    ucwords(mb_convert_case(strtolower($reference), MB_CASE_TITLE, 'UTF-8'))
                 )
             ),
             My::REFS_MODE_NONE => $reference,
