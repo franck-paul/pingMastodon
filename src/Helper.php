@@ -38,7 +38,7 @@ class Helper
     public static function ping(BlogInterface $blog, array|ArrayObject $ids, bool $ignore_category = false): string
     {
         $settings = My::settings();
-        if (!$settings->getBool('active')) {
+        if (!$settings->getBool('active', false)) {
             return '';
         }
 
@@ -65,7 +65,7 @@ class Helper
         }
 
         // Prepare instance URI
-        if (!parse_url($instance, PHP_URL_HOST)) {
+        if (parse_url($instance, PHP_URL_HOST) === null) {
             $instance = 'https://' . $instance;
         }
 
@@ -100,7 +100,7 @@ class Helper
                 $post_title = $rs->strField('post_title');
 
                 $elements    = [];
-                $catchphrase = $settings->getBool('catchphrase') ? self::getCatchPhrase($post_id) : '';
+                $catchphrase = $settings->getBool('catchphrase', false) ? self::getCatchPhrase($post_id) : '';
                 if ($catchphrase !== '') {
                     $catchphrase .= "\n";
                 }
