@@ -73,15 +73,14 @@ class BackendBehaviors
 
     /**
      * @param   Cursor  $cursor        The current
-     * @param   mixed   $post_id    The post identifier
+     * @param   int     $post_id    The post identifier
      */
-    public static function setCatchPhrase(Cursor $cursor, $post_id): void
+    public static function setCatchPhrase(Cursor $cursor, int $post_id): void
     {
         if (!My::settings()->getBool('active', false)) {
             return;
         }
 
-        $post_id = is_numeric($post_id) ? (int) $post_id : 0;
         if ($post_id === 0) {
             return;
         }
